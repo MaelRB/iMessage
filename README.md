@@ -18,3 +18,5 @@ Below you can see how I implemented this features
 - Creation of a Database on Firestore
 - Add communication stuff between the app and firestore
 - Create bubble text message to dispaly messages
+
+<img width="902" alt="Screenshot 2020-05-25 at 20 03 34" src="https://user-images.githubusercontent.com/38114983/82834967-f5a07880-9ec2-11ea-8a88-4dd3477d7370.png">
