@@ -14,8 +14,8 @@ class MessageViewController: UIViewController {
     // MARK: UI Elements
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var bottomConstraints: NSLayoutConstraint!
     
     // MARK: Other properties
     let db = Firestore.firestore()
@@ -54,21 +54,18 @@ class MessageViewController: UIViewController {
 
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            view.transform = CGAffineTransform.identity
-            self.tableViewTopConstraint.constant = 0
-            self.tableView.layoutIfNeeded()
-        } else {
-            view.transform = CGAffineTransform(translationX: 0, y: -keyboardViewEndFrame.height)
-            self.tableViewTopConstraint.constant = keyboardViewEndFrame.height
-            self.tableView.layoutIfNeeded()
-
-        }
         
-        if messages.isEmpty == false {
-            let lastCell = IndexPath(row: messages.count - 1, section: 0)
-            tableView.scrollToRow(at: lastCell, at: .bottom, animated: false)
+        let isKeyboardShowing = notification.name == UIResponder.keyboardWillChangeFrameNotification
+        
+        bottomConstraints.constant = isKeyboardShowing ? keyboardViewEndFrame.height : 0
+        
+        UIView.animate(withDuration: 0, delay: 0, options: .curveLinear, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            if self.messages.isEmpty == false {
+                let lastCell = IndexPath(row: self.messages.count - 1, section: 0)
+                self.tableView.scrollToRow(at: lastCell, at: .bottom, animated: true)
+            }
         }
     }
     

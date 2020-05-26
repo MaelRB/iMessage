@@ -349,9 +349,9 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="sCV-2q-WR9"/>
                     <connections>
+                        <outlet property="bottomConstraints" destination="FoH-VO-OA4" id="SPJ-Na-BFA"/>
                         <outlet property="messageTextField" destination="aTp-d8-u95" id="Wg6-cS-ZLp"/>
                         <outlet property="tableView" destination="VSq-Qj-Bk2" id="P6C-9r-Vgm"/>
-                        <outlet property="tableViewTopConstraint" destination="Y3C-OC-goB" id="kGM-U4-gTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut8-NO-R8r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
