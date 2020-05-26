@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pSI-U0-NVx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pSI-U0-NVx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -313,6 +313,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="299.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="n9v-y4-phf" id="OEY-Gx-1ug"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxD-YO-D67">
                                         <rect key="frame" x="307.5" y="0.0" width="86.5" height="30"/>
@@ -332,7 +335,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CRv-fH-lag" firstAttribute="trailing" secondItem="Epz-oZ-ekk" secondAttribute="trailing" constant="10" id="5Pi-Fg-rBL"/>
                             <constraint firstItem="CRv-fH-lag" firstAttribute="bottom" secondItem="Epz-oZ-ekk" secondAttribute="bottom" id="FoH-VO-OA4"/>
@@ -348,6 +351,7 @@
                     <connections>
                         <outlet property="messageTextField" destination="aTp-d8-u95" id="Wg6-cS-ZLp"/>
                         <outlet property="tableView" destination="VSq-Qj-Bk2" id="P6C-9r-Vgm"/>
+                        <outlet property="tableViewTopConstraint" destination="Y3C-OC-goB" id="kGM-U4-gTs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut8-NO-R8r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

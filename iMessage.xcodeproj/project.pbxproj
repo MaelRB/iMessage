@@ -174,6 +174,8 @@
 			dependencies = (
 			);
 			name = iMessage;
+			packageProductDependencies = (
+			);
 			productName = iMessage;
 			productReference = 8A6915872461F10200616595 /* iMessage.app */;
 			productType = "com.apple.product-type.application";
@@ -202,6 +204,8 @@
 				Base,
 			);
 			mainGroup = 8A69157E2461F10200616595;
+			packageReferences = (
+			);
 			productRefGroup = 8A6915882461F10200616595 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

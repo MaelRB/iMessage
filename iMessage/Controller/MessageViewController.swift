@@ -11,16 +11,20 @@ import Firebase
 
 class MessageViewController: UIViewController {
 
+    // MARK: UI Elements
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTextField: UITextField!
     
+    // MARK: Other properties
     let db = Firestore.firestore()
     
     var discussion: Discussion?
     
     var messages = [Message]()
     
+    // MARK: - View methods
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -31,11 +35,44 @@ class MessageViewController: UIViewController {
         
         tableView.register(MessageCell.self, forCellReuseIdentifier: "bubbleCell")
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .onDrag
         
         loadMessages()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
+        send()
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            view.transform = CGAffineTransform.identity
+            self.tableViewTopConstraint.constant = 0
+            self.tableView.layoutIfNeeded()
+        } else {
+            view.transform = CGAffineTransform(translationX: 0, y: -keyboardViewEndFrame.height)
+            self.tableViewTopConstraint.constant = keyboardViewEndFrame.height
+            self.tableView.layoutIfNeeded()
+
+        }
+        
+        if messages.isEmpty == false {
+            let lastCell = IndexPath(row: messages.count - 1, section: 0)
+            tableView.scrollToRow(at: lastCell, at: .bottom, animated: false)
+        }
+    }
+    
+    func send() {
         let message = Message(body: messageTextField.text!, sender: Auth.auth().currentUser!.email!)
         addMessage(message)
         messages.append(message)
@@ -76,10 +113,12 @@ class MessageViewController: UIViewController {
                 }
             }
         }
-        
     }
+    
+    
 }
 
+// MARK: - Table view delegate & data source methods
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,4 +134,11 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constant.CellSize.cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
 }
+
+
