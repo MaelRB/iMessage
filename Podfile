@@ -8,5 +8,6 @@ target 'iMessage' do
   # Pods for iMessage
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'ChameleonFramework/Swift'
 
 end

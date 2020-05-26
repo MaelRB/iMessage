@@ -14,6 +14,20 @@
 		8A6915942461F10400616595 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A6915932461F10400616595 /* Assets.xcassets */; };
 		8A6915972461F10400616595 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A6915952461F10400616595 /* LaunchScreen.storyboard */; };
 		8A69159F2461F19C00616595 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A69159E2461F19C00616595 /* GoogleService-Info.plist */; };
+		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
+		8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B3247D7FD90062CC93 /* LogView.swift */; };
+		8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B5247D80050062CC93 /* MRBTextField.swift */; };
+		8AA618B8247D80180062CC93 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B7247D80180062CC93 /* LoginView.swift */; };
+		8AA618BB247D804C0062CC93 /* LogScreenStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */; };
+		8AA618BE247D80AB0062CC93 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BD247D80AB0062CC93 /* RegisterView.swift */; };
+		8AA618C0247D80CE0062CC93 /* UIStackViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */; };
+		8AA618C2247D80E30062CC93 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C1247D80E30062CC93 /* CheckButton.swift */; };
+		8AA618C4247D80FD0062CC93 /* AppTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */; };
+		8AA618C6247D81140062CC93 /* TopCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C5247D81140062CC93 /* TopCurveView.swift */; };
+		8AA618C8247D812F0062CC93 /* BottomCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C7247D812F0062CC93 /* BottomCurveView.swift */; };
+		8AA618CA247D81550062CC93 /* LogScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C9247D81550062CC93 /* LogScreenState.swift */; };
+		8AA618CD247D81850062CC93 /* SF-Pro-Rounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8AA618CC247D81850062CC93 /* SF-Pro-Rounded-Medium.otf */; };
+		8AA618CF247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8AA618CE247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf */; };
 		8AAB8EAE24697FEF006C8244 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB8EAD24697FEF006C8244 /* LoginViewController.swift */; };
 		8AAB8EB024698035006C8244 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB8EAF24698035006C8244 /* RegisterViewController.swift */; };
 		8AAB8EB22469865A006C8244 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB8EB12469865A006C8244 /* DiscussionViewController.swift */; };
@@ -38,6 +52,20 @@
 		8A6915962461F10400616595 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A6915982461F10400616595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A69159E2461F19C00616595 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
+		8AA618B3247D7FD90062CC93 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		8AA618B5247D80050062CC93 /* MRBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRBTextField.swift; sourceTree = "<group>"; };
+		8AA618B7247D80180062CC93 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenStateButton.swift; sourceTree = "<group>"; };
+		8AA618BD247D80AB0062CC93 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExt.swift; sourceTree = "<group>"; };
+		8AA618C1247D80E30062CC93 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTitleLabel.swift; sourceTree = "<group>"; };
+		8AA618C5247D81140062CC93 /* TopCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCurveView.swift; sourceTree = "<group>"; };
+		8AA618C7247D812F0062CC93 /* BottomCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCurveView.swift; sourceTree = "<group>"; };
+		8AA618C9247D81550062CC93 /* LogScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenState.swift; sourceTree = "<group>"; };
+		8AA618CC247D81850062CC93 /* SF-Pro-Rounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Medium.otf"; sourceTree = "<group>"; };
+		8AA618CE247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
 		8AAB8EAD24697FEF006C8244 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8AAB8EAF24698035006C8244 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8AAB8EB12469865A006C8244 /* DiscussionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
@@ -85,8 +113,11 @@
 		8A6915892461F10200616595 /* iMessage */ = {
 			isa = PBXGroup;
 			children = (
+				8AA618CB247D81780062CC93 /* Font */,
+				8AA618AE247D7F3B0062CC93 /* LogScreen */,
 				8A69158A2461F10200616595 /* AppDelegate.swift */,
 				8A69158C2461F10200616595 /* SceneDelegate.swift */,
+				8AAB8EBA246993E1006C8244 /* Constant.swift */,
 				8AAB8EB9246993CC006C8244 /* Model */,
 				8AAB8EB8246993B1006C8244 /* View */,
 				8AAB8EB724699387006C8244 /* Controller */,
@@ -97,6 +128,50 @@
 				8A69159E2461F19C00616595 /* GoogleService-Info.plist */,
 			);
 			path = iMessage;
+			sourceTree = "<group>";
+		};
+		8AA618AE247D7F3B0062CC93 /* LogScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8AA618B2247D7FC80062CC93 /* Model */,
+				8AA618AF247D7F950062CC93 /* Controller */,
+			);
+			path = LogScreen;
+			sourceTree = "<group>";
+		};
+		8AA618AF247D7F950062CC93 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8AA618B2247D7FC80062CC93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8AA618B3247D7FD90062CC93 /* LogView.swift */,
+				8AA618B5247D80050062CC93 /* MRBTextField.swift */,
+				8AA618B7247D80180062CC93 /* LoginView.swift */,
+				8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */,
+				8AA618BD247D80AB0062CC93 /* RegisterView.swift */,
+				8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */,
+				8AA618C1247D80E30062CC93 /* CheckButton.swift */,
+				8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */,
+				8AA618C5247D81140062CC93 /* TopCurveView.swift */,
+				8AA618C7247D812F0062CC93 /* BottomCurveView.swift */,
+				8AA618C9247D81550062CC93 /* LogScreenState.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8AA618CB247D81780062CC93 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				8AA618CC247D81850062CC93 /* SF-Pro-Rounded-Medium.otf */,
+				8AA618CE247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		8AAB8EB724699387006C8244 /* Controller */ = {
@@ -125,7 +200,6 @@
 			children = (
 				8AAB8EC9246B2A93006C8244 /* Discussion.swift */,
 				8AAB8EC3246A7DD5006C8244 /* Message.swift */,
-				8AAB8EBA246993E1006C8244 /* Constant.swift */,
 				8AAB8EBE2469B2B9006C8244 /* User.swift */,
 			);
 			path = Model;
@@ -221,6 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A6915972461F10400616595 /* LaunchScreen.storyboard in Resources */,
+				8AA618CF247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf in Resources */,
+				8AA618CD247D81850062CC93 /* SF-Pro-Rounded-Medium.otf in Resources */,
 				8A69159F2461F19C00616595 /* GoogleService-Info.plist in Resources */,
 				8A6915942461F10400616595 /* Assets.xcassets in Resources */,
 				8A6915922461F10200616595 /* Main.storyboard in Resources */,
@@ -277,17 +353,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AAB8EBB246993E1006C8244 /* Constant.swift in Sources */,
+				8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */,
 				8AAB8EB22469865A006C8244 /* DiscussionViewController.swift in Sources */,
 				8AAB8EAE24697FEF006C8244 /* LoginViewController.swift in Sources */,
 				8AAB8EC12469B6CF006C8244 /* MessageCell.swift in Sources */,
+				8AA618C8247D812F0062CC93 /* BottomCurveView.swift in Sources */,
 				8AAB8EB024698035006C8244 /* RegisterViewController.swift in Sources */,
 				8AAB8EBD24699794006C8244 /* MessageViewController.swift in Sources */,
+				8AA618C4247D80FD0062CC93 /* AppTitleLabel.swift in Sources */,
+				8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */,
+				8AA618BE247D80AB0062CC93 /* RegisterView.swift in Sources */,
 				8AAB8EC6246AD0F8006C8244 /* CreateDiscussionViewController.swift in Sources */,
 				8AAB8EC4246A7DD5006C8244 /* Message.swift in Sources */,
+				8AA618B8247D80180062CC93 /* LoginView.swift in Sources */,
 				8AAB8EBF2469B2B9006C8244 /* User.swift in Sources */,
+				8AA618C6247D81140062CC93 /* TopCurveView.swift in Sources */,
+				8AA618C2247D80E30062CC93 /* CheckButton.swift in Sources */,
 				8A69158F2461F10200616595 /* ViewController.swift in Sources */,
 				8AAB8ECA246B2A93006C8244 /* Discussion.swift in Sources */,
+				8AA618C0247D80CE0062CC93 /* UIStackViewExt.swift in Sources */,
 				8A69158B2461F10200616595 /* AppDelegate.swift in Sources */,
+				8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */,
+				8AA618BB247D804C0062CC93 /* LogScreenStateButton.swift in Sources */,
+				8AA618CA247D81550062CC93 /* LogScreenState.swift in Sources */,
 				8A69158D2461F10200616595 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

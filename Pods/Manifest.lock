@@ -5,6 +5,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - Firebase/Auth (6.9.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.2.3)
@@ -90,12 +93,14 @@ PODS:
   - Protobuf (3.11.4)
 
 DEPENDENCIES:
+  - ChameleonFramework/Swift
   - Firebase/Auth
   - Firebase/Firestore
 
 SPEC REPOS:
   trunk:
     - BoringSSL-GRPC
+    - ChameleonFramework
     - Firebase
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -115,6 +120,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
   FirebaseAuth: e7f86c2dfc57281cd01f7da5e4b40e01e4510a4a
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -132,6 +138,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
-PODFILE CHECKSUM: 9aecd02453f22343202debc564fcdb8f2d518473
+PODFILE CHECKSUM: f457aaa0f737683683f0c8bcfba29ae6fc8e3f42
 
 COCOAPODS: 1.8.1
