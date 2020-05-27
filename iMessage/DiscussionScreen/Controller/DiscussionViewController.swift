@@ -13,7 +13,7 @@ class DiscussionViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let db = Firestore.firestore()
+    let dbCommunication = DBCommunication()
     
     var discussions = [Discussion]()
     
@@ -41,69 +41,15 @@ class DiscussionViewController: UIViewController {
     //MARK: - Firebase methods
     
     func loadDiscussion() {
-        let discussionRef = db.collection(Constant.FStore.discussionCollection).whereField(Constant.FStore.discussionParticipant, arrayContains: Auth.auth().currentUser!.email!)
-        discussionRef.order(by: Constant.FStore.date, descending: true).addSnapshotListener { (snapshot, error) in
-            self.discussions = []
-            if error != nil {
-                print(error!.localizedDescription)
-            } else {
-                for doc in snapshot!.documents {
-                    let data = doc.data()
-                    guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { return }
-                    guard let user = self.getParticipant(of: participant) else { return }
-                    guard let id = data[Constant.FStore.discussionID] as? String else { return }
-                    let discussion = Discussion(id: id, to: user)
-                    self.discussions.append(discussion)
-                
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
+        dbCommunication.loadDiscussion { (discussions) in
+            self.discussions = discussions
+            self.tableView.reloadData()
         }
-
-    }
-    
-    func getParticipant(of part: [String]) -> User? {
-        var toHimself = 0
-        for user in part {
-            if user != Auth.auth().currentUser!.email! {
-                for contact in Constant.Contact.listOfContacts {
-                    if contact.email == user {
-                        return contact
-                    }
-                }
-            } else {
-                toHimself += 1
-            }
-        }
-        if toHimself == part.count {
-            for contact in Constant.Contact.listOfContacts {
-                if contact.email == Auth.auth().currentUser!.email {
-                    return contact
-                }
-            }
-        }
-        return nil
     }
     
     @objc func logoutUser() {
-        let firebaseAuth = Auth.auth()
-        do {
-           try firebaseAuth.signOut()
-            navigationController?.popToRootViewController(animated: true)
-        }
-        catch
-            let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
-    
-    func removeDiscussionFromFirestore(_ discussionID: String) {
-        db.collection(Constant.FStore.discussionCollection).document(discussionID).delete { (error) in
-            if error != nil {
-                print(error!)
-            }
+        dbCommunication.logout {
+            // Go to logScreen
         }
     }
     
@@ -119,6 +65,7 @@ class DiscussionViewController: UIViewController {
     }
 }
 
+// MARK: - TableView delegate & data source methods
 extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,7 +86,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let eltRemoved = discussions.remove(at: indexPath.row)
-            removeDiscussionFromFirestore(eltRemoved.id)
+            dbCommunication.deleteDiscussion(eltRemoved)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
