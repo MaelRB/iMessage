@@ -10,6 +10,10 @@ import UIKit
 
 class LogScreenViewController: UIViewController {
     
+    // MARK: - Logic controller
+    // Manage the communication with firestore asynchronously
+    let logicController = LogScreenLogicController()
+    
     // MARK: - UI elements
     lazy var logScreenStateButton = LogScreenStateButton(frame: .zero)
     
@@ -21,7 +25,7 @@ class LogScreenViewController: UIViewController {
     var loginView: LoginView!
     var registerView: RegisterView!
     
-    var screenState = LogScreenState.Login
+    var screenState = LogScreenState.login
 
     // MARK: - View methods
     override func viewDidLoad() {
@@ -53,6 +57,8 @@ class LogScreenViewController: UIViewController {
         
         logScreenStateButton.addTarget(self, action: #selector(screenStateButtonTapped), for: .touchUpInside)
         
+        loginView.logButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
+        registerView.registerButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +83,7 @@ class LogScreenViewController: UIViewController {
         }
     }
     
-    // MARK: - Other
+    // MARK: - Setup
     // set constraints for loginView and registerView
     func setConstraints(for view: LogView) {
         self.view.insertSubview(view, at: 0)
@@ -87,38 +93,70 @@ class LogScreenViewController: UIViewController {
         view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
     }
     
+    // MARK: - Transition methods
     @objc func screenStateButtonTapped() {
         switch screenState {
-        case .Login:
-            screenState = .Register
-            logScreenStateButton.disparition("Login")
-            loginView.disparition {
-                self.loginView.isHidden = true
-                self.registerView.isHidden = false
-                self.registerView.apparition()
-                self.logScreenStateButton.apparition {
-                    // Move the button to the last subview otherwise the tap event isn't triger
-                    self.logScreenStateButton.removeFromSuperview()
-                    self.view.addSubview(self.logScreenStateButton)
-                }
-            }
-        case .Register:
-            screenState = .Login
-            logScreenStateButton.disparition("Register")
-            registerView.disparition {
-                self.loginView.isHidden = false
-                self.registerView.isHidden = true
-                self.loginView.apparition()
-                self.logScreenStateButton.apparition {
-                    // Move the button to the last subview otherwise the tap event isn't triger
-                    self.logScreenStateButton.removeFromSuperview()
-                    self.view.addSubview(self.logScreenStateButton)
-                }
+        case .login:
+            transitionFromLoginToRegister()
+        case .register:
+            transitionFromRegisterToLogin()
+        }
+    }
+    
+    func transitionFromLoginToRegister() {
+        screenState = .register
+        logScreenStateButton.disparition("Login")
+        loginView.disparition {
+            self.loginView.isHidden = true
+            self.registerView.isHidden = false
+            self.registerView.apparition()
+            self.logScreenStateButton.apparition {
+                // Move the button to the last subview otherwise the tap event isn't triger
+                self.logScreenStateButton.removeFromSuperview()
+                self.view.addSubview(self.logScreenStateButton)
             }
         }
     }
     
+    func transitionFromRegisterToLogin() {
+        screenState = .login
+        logScreenStateButton.disparition("Register")
+        registerView.disparition {
+            self.loginView.isHidden = false
+            self.registerView.isHidden = true
+            self.loginView.apparition()
+            self.logScreenStateButton.apparition {
+                // Move the button to the last subview otherwise the tap event isn't triger
+                self.logScreenStateButton.removeFromSuperview()
+                self.view.addSubview(self.logScreenStateButton)
+            }
+        }
+    }
     
+    @objc func checkButtonTapped() {
+        
+        switch screenState {
+        case .login:
+            guard let logInfo = loginView.getTextFieldInput() else { return }
+            logicController.log(email: logInfo.0, password: logInfo.1, with: screenState) { (state) in
+                self.render(state)
+            }
+        case .register:
+            guard let logInfo = registerView.getTextFieldInput() else { return }
+            logicController.log(email: logInfo.0, password: logInfo.1, with: screenState) { (state) in
+                self.render(state)
+            }
+        }
+    }
+    
+    func render(_ state: DBState) {
+        switch state {
+        case .successed:
+            performSegue(withIdentifier: "goToDiscussion", sender: self)
+        case .failed(_):
+            break
+        }
+    }
     
     
 }

@@ -14,8 +14,7 @@ class LoginView: LogView {
     private var mailTextField: MRBTextField!
     private var passwordTextField: MRBTextField!
     
-    private var logButton: CheckButton!
- 
+    var logButton: CheckButton!
     
     //MARK: - Init
     
@@ -75,6 +74,13 @@ class LoginView: LogView {
         stackView.widthAnchor.constraint(equalToConstant: Constant.Size.textFieldSize.width).isActive = true
         stackViewLeftConstraint = stackView.leftAnchor.constraint(equalTo: self.leftAnchor)
         stackViewLeftConstraint.isActive = true
+    }
+    
+    //MARK: - Interface
+    
+    func getTextFieldInput() -> (String, String)? {
+        guard let email = mailTextField.textField.text, let password = passwordTextField.textField.text else { return nil}
+        return (email, password)
     }
 
 }

@@ -77,8 +77,8 @@ struct Constant {
     }
     
     struct Font {
-        static let textFont: UIFont = UIFont(name: "SFProRounded-Medium", size: 18)!
+        static let textFont: UIFont = .systemFont(ofSize: 18)
         static let placeolderFont: UIFont = .systemFont(ofSize: 16)
-        static let titleFont: UIFont = UIFont(name: "SFProRounded-Semibold", size: 34)!
+        static let titleFont: UIFont = .boldSystemFont(ofSize: 34)
     }
 }

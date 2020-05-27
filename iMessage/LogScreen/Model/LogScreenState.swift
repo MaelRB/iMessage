@@ -9,6 +9,6 @@
 import Foundation
 
 enum LogScreenState {
-    case Login
-    case Register
+    case login
+    case register
 }

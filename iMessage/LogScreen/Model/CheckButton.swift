@@ -32,4 +32,5 @@ class CheckButton: UIButton {
         self.tintColor = Constant.Color.background
         
     }
+    
 }

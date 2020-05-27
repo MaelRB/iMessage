@@ -15,7 +15,7 @@ class RegisterView: LogView {
     private var passwordTextField: MRBTextField!
     private var usernameTextField: MRBTextField!
     
-    private var registerButton: CheckButton!
+    var registerButton: CheckButton!
 
         
     //MARK: - Init
@@ -85,6 +85,13 @@ class RegisterView: LogView {
         stackView.widthAnchor.constraint(equalToConstant: Constant.Size.textFieldSize.width).isActive = true
         stackViewLeftConstraint = stackView.leftAnchor.constraint(equalTo: self.leftAnchor)
         stackViewLeftConstraint.isActive = true
+    }
+    
+    //MARK: - Interface
+    
+    func getTextFieldInput() -> (String, String)? {
+        guard let email = mailTextField.textField.text, let password = passwordTextField.textField.text else { return nil}
+        return (email, password)
     }
         
 }
