@@ -9,5 +9,6 @@ target 'iMessage' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'ChameleonFramework/Swift'
+  pod 'lottie-ios'
 
 end

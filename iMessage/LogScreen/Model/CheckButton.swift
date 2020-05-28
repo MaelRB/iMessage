@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Lottie
 
 class CheckButton: UIButton {
+    
+    private let animationView = AnimationView(name: "loading")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,12 +28,42 @@ class CheckButton: UIButton {
         self.layer.shadowOffset = CGSize(width: 3, height: 2)
         self.layer.shadowOpacity = 0.4
         
-        let config = UIImage.SymbolConfiguration(pointSize: 24)
-        self.setImage(UIImage(systemName: "arrow.right", withConfiguration: config), for: .normal)
+        setImage()
         
         self.backgroundColor = Constant.Color.buttonGradient(self.frame)
         self.tintColor = Constant.Color.background
         
+        setAnimationView()
+    }
+    
+    private func setAnimationView() {
+        animationView.backgroundColor = .clear
+        animationView.frame = self.bounds
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 1
+        animationView.isHidden = true
+        addSubview(animationView)
+    }
+    
+    private func setImage() {
+        let config = UIImage.SymbolConfiguration(pointSize: 24)
+        self.setImage(UIImage(systemName: "arrow.right", withConfiguration: config), for: .normal)
+    }
+    
+    func loading() {
+        self.isEnabled = false
+        self.imageView?.isHidden = true
+        self.setImage(nil, for: .normal)
+        animationView.isHidden = false
+        animationView.play()
+    }
+    
+    func stopLoading() {
+        animationView.stop()
+        animationView.isHidden = true
+        setImage()
+        self.isEnabled = true
     }
     
 }

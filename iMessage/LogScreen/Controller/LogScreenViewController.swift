@@ -150,15 +150,20 @@ class LogScreenViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
+        view.endEditing(true)
         switch screenState {
         case .login:
+            loginView.logButton.loading()
             guard let logInfo = loginView.getTextFieldInput() else { return }
             logicController.log(email: logInfo.0, password: logInfo.1, with: screenState) { (state) in
+                self.loginView.logButton.stopLoading()
                 self.render(state)
             }
         case .register:
+            registerView.registerButton.loading()
             guard let logInfo = registerView.getTextFieldInput() else { return }
             logicController.log(email: logInfo.0, password: logInfo.1, with: screenState) { (state) in
+                self.registerView.registerButton.stopLoading()
                 self.render(state)
             }
         }

@@ -16,6 +16,7 @@
 		8A9DDDB1247E9D1D00745539 /* LogScreenLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB0247E9D1D00745539 /* LogScreenLogicController.swift */; };
 		8A9DDDB7247E9EA300745539 /* DBCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB6247E9EA300745539 /* DBCommunication.swift */; };
 		8A9DDDB9247E9F8100745539 /* DBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB8247E9F8100745539 /* DBState.swift */; };
+		8A9DDDDC247FF95E00745539 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A9DDDDB247FF95D00745539 /* loading.json */; };
 		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
 		8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B3247D7FD90062CC93 /* LogView.swift */; };
 		8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B5247D80050062CC93 /* MRBTextField.swift */; };
@@ -54,6 +55,7 @@
 		8A9DDDB0247E9D1D00745539 /* LogScreenLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogScreenLogicController.swift; path = iMessage/LogScreen/Model/LogScreenLogicController.swift; sourceTree = SOURCE_ROOT; };
 		8A9DDDB6247E9EA300745539 /* DBCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCommunication.swift; sourceTree = "<group>"; };
 		8A9DDDB8247E9F8100745539 /* DBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBState.swift; sourceTree = "<group>"; };
+		8A9DDDDB247FF95D00745539 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
 		8AA618B3247D7FD90062CC93 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		8AA618B5247D80050062CC93 /* MRBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRBTextField.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				8A69158A2461F10200616595 /* AppDelegate.swift */,
 				8A69158C2461F10200616595 /* SceneDelegate.swift */,
+				8A9DDDDA247FF94200745539 /* Lottie */,
 				8AA618CB247D81780062CC93 /* Font */,
 				8AA618AE247D7F3B0062CC93 /* LogScreen */,
 				8A9DDDB2247E9DBD00745539 /* DiscussionScreen */,
@@ -161,6 +164,14 @@
 				8AAB8EBC24699794006C8244 /* MessageViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A9DDDDA247FF94200745539 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				8A9DDDDB247FF95D00745539 /* loading.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		8AA618AE247D7F3B0062CC93 /* LogScreen */ = {
@@ -322,6 +333,7 @@
 				8AA618CF247D81900062CC93 /* SF-Pro-Rounded-Semibold.otf in Resources */,
 				8A69159F2461F19C00616595 /* GoogleService-Info.plist in Resources */,
 				8AA618D3247D83950062CC93 /* SF-Pro-Rounded-Medium.otf in Resources */,
+				8A9DDDDC247FF95E00745539 /* loading.json in Resources */,
 				8A6915942461F10400616595 /* Assets.xcassets in Resources */,
 				8A6915922461F10200616595 /* Main.storyboard in Resources */,
 			);
