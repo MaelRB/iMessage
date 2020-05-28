@@ -21,9 +21,7 @@
 		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
 		8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B3247D7FD90062CC93 /* LogView.swift */; };
 		8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B5247D80050062CC93 /* MRBTextField.swift */; };
-		8AA618B8247D80180062CC93 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B7247D80180062CC93 /* LoginView.swift */; };
-		8AA618BB247D804C0062CC93 /* LogScreenStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */; };
-		8AA618BE247D80AB0062CC93 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BD247D80AB0062CC93 /* RegisterView.swift */; };
+		8AA618BB247D804C0062CC93 /* ScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BA247D804C0062CC93 /* ScreenButton.swift */; };
 		8AA618C0247D80CE0062CC93 /* UIStackViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */; };
 		8AA618C2247D80E30062CC93 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C1247D80E30062CC93 /* CheckButton.swift */; };
 		8AA618C4247D80FD0062CC93 /* AppTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */; };
@@ -61,9 +59,7 @@
 		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
 		8AA618B3247D7FD90062CC93 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		8AA618B5247D80050062CC93 /* MRBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRBTextField.swift; sourceTree = "<group>"; };
-		8AA618B7247D80180062CC93 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenStateButton.swift; sourceTree = "<group>"; };
-		8AA618BD247D80AB0062CC93 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		8AA618BA247D804C0062CC93 /* ScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenButton.swift; sourceTree = "<group>"; };
 		8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExt.swift; sourceTree = "<group>"; };
 		8AA618C1247D80E30062CC93 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTitleLabel.swift; sourceTree = "<group>"; };
@@ -199,10 +195,8 @@
 			children = (
 				8AA618B3247D7FD90062CC93 /* LogView.swift */,
 				8AA618B5247D80050062CC93 /* MRBTextField.swift */,
-				8AA618B7247D80180062CC93 /* LoginView.swift */,
 				8A9DDDDD2480006800745539 /* LogError.swift */,
-				8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */,
-				8AA618BD247D80AB0062CC93 /* RegisterView.swift */,
+				8AA618BA247D804C0062CC93 /* ScreenButton.swift */,
 				8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */,
 				8AA618C1247D80E30062CC93 /* CheckButton.swift */,
 				8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */,
@@ -399,11 +393,9 @@
 				8AAB8EBD24699794006C8244 /* MessageViewController.swift in Sources */,
 				8AA618C4247D80FD0062CC93 /* AppTitleLabel.swift in Sources */,
 				8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */,
-				8AA618BE247D80AB0062CC93 /* RegisterView.swift in Sources */,
 				8A9DDDB1247E9D1D00745539 /* LogScreenLogicController.swift in Sources */,
 				8AAB8EC6246AD0F8006C8244 /* CreateDiscussionViewController.swift in Sources */,
 				8AAB8EC4246A7DD5006C8244 /* Message.swift in Sources */,
-				8AA618B8247D80180062CC93 /* LoginView.swift in Sources */,
 				8AAB8EBF2469B2B9006C8244 /* User.swift in Sources */,
 				8AA618C6247D81140062CC93 /* TopCurveView.swift in Sources */,
 				8AA618C2247D80E30062CC93 /* CheckButton.swift in Sources */,
@@ -413,7 +405,7 @@
 				8A69158B2461F10200616595 /* AppDelegate.swift in Sources */,
 				8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */,
 				8A9DDDB7247E9EA300745539 /* DBCommunication.swift in Sources */,
-				8AA618BB247D804C0062CC93 /* LogScreenStateButton.swift in Sources */,
+				8AA618BB247D804C0062CC93 /* ScreenButton.swift in Sources */,
 				8AA618CA247D81550062CC93 /* LogScreenState.swift in Sources */,
 				8A69158D2461F10200616595 /* SceneDelegate.swift in Sources */,
 				8A9DDDDE2480006800745539 /* LogError.swift in Sources */,
