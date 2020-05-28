@@ -21,6 +21,7 @@ class DiscussionViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutUser))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(addDiscussion))
@@ -49,7 +50,7 @@ class DiscussionViewController: UIViewController {
     
     @objc func logoutUser() {
         dbCommunication.logout {
-            // Go to logScreen
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     

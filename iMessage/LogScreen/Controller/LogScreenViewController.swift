@@ -26,6 +26,8 @@ class LogScreenViewController: UIViewController {
     var registerView: RegisterView!
     
     var screenState = LogScreenState.login
+    
+    var isFirstLaunch = true
 
     // MARK: - View methods
     override func viewDidLoad() {
@@ -59,27 +61,41 @@ class LogScreenViewController: UIViewController {
         
         loginView.logButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         registerView.registerButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
+        
+        // Create a tap gesture to dismiss keyboard when tapping outside the keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        loginView.cleanTextField()
+        registerView.cleanTextField()
+        view.endEditing(false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseIn, animations: {
-            self.topCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.125)
-            self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.125)
-        }) { (bool) in
-            // First load, initialization with login view
-            self.appTitle.removeFromSuperview()
-            self.view.insertSubview(self.logScreenStateButton, at: 0)
-            self.loginView.isHidden = false
-            UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {
-                self.topCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.25)
-                self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.25)
-            }) { (_) in
-                // Move the button to the last subview otherwise the tap event isn't triger
-                self.logScreenStateButton.removeFromSuperview()
-                self.view.addSubview(self.logScreenStateButton)
-                self.view.insertSubview(self.topCurve, at: 0)
-                self.view.insertSubview(self.bottomCurve, at: 0)
+        if isFirstLaunch == true {
+            UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseIn, animations: {
+                self.topCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.125)
+                self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.125)
+            }) { (bool) in
+                // First load, initialization with login view
+                self.appTitle.removeFromSuperview()
+                self.view.insertSubview(self.logScreenStateButton, at: 0)
+                self.loginView.isHidden = false
+                UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {
+                    self.topCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.25)
+                    self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.25)
+                }) { (_) in
+                    // Move the button to the last subview otherwise the tap event isn't triger
+                    self.logScreenStateButton.removeFromSuperview()
+                    self.view.addSubview(self.logScreenStateButton)
+                    self.view.insertSubview(self.topCurve, at: 0)
+                    self.view.insertSubview(self.bottomCurve, at: 0)
+                }
             }
+            isFirstLaunch = false
         }
     }
     
@@ -134,7 +150,6 @@ class LogScreenViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
-        
         switch screenState {
         case .login:
             guard let logInfo = loginView.getTextFieldInput() else { return }
@@ -156,6 +171,10 @@ class LogScreenViewController: UIViewController {
         case .failed(_):
             break
         }
+    }
+    
+    @objc func endEditing() {
+        view.endEditing(true)
     }
     
     

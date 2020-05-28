@@ -82,5 +82,10 @@ class LoginView: LogView {
         guard let email = mailTextField.textField.text, let password = passwordTextField.textField.text else { return nil}
         return (email, password)
     }
+    
+    func cleanTextField() {
+        mailTextField.textField.text = nil
+        passwordTextField.textField.text = nil
+    }
 
 }

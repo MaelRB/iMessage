@@ -10,7 +10,7 @@ import UIKit
 
 
 /// A text field with an image in the left side
-class MRBTextField: UIView {
+class MRBTextField: UIView, UITextFieldDelegate {
     
     // MARK: - UI elements
     var imageView: UIImageView!
@@ -48,6 +48,8 @@ class MRBTextField: UIView {
         textField.autocapitalizationType = .none
         textField.spellCheckingType = .no
         
+        textField.delegate = self
+        
     }
     
     private func setImageViewConstraints() {
@@ -64,6 +66,11 @@ class MRBTextField: UIView {
         textField.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         textField.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         textField.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 }
