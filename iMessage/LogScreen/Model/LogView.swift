@@ -32,14 +32,20 @@ class LogView: UIView {
     private func setup() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .clear
-        
+        setStackView()
+        setTitle()
+    }
+    
+    private func setStackView() {
         stackView = UIStackView()
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.customize(backgroundColor: .white, radiusSize: Constant.Size.textFieldSize.height / 1.6)
-        
+    }
+    
+    private func setTitle() {
         title = UILabel()
         title.textAlignment = .center
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +60,8 @@ class LogView: UIView {
         title.widthAnchor.constraint(equalToConstant: 150).isActive = true
         title.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
+    
+    // MARK: - Interface
     
     /// To remove self by an animated way
     func disparition(handler: @escaping () -> Void) {

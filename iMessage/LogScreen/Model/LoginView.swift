@@ -13,6 +13,7 @@ class LoginView: LogView {
     //MARK: - UI elements
     private var mailTextField: MRBTextField!
     private var passwordTextField: MRBTextField!
+    var alertLabel: UILabel!
     
     var logButton: CheckButton!
     
@@ -63,7 +64,8 @@ class LoginView: LogView {
         let height = Constant.Size.textFieldSize.height
         logButton.frame = CGRect(x: xPos, y: height / 1.8, width: height * 0.8, height: height * 0.8)
         logButton.setup()
-
+        
+        setAlertLabel()
     }
     
     // Stack view constraints are set here and not in LogView because his height depends of the amount of elements it contains (2 for login view)
@@ -76,6 +78,23 @@ class LoginView: LogView {
         stackViewLeftConstraint.isActive = true
     }
     
+    private func setAlertLabel() {
+        alertLabel = UILabel()
+        alertLabel.textColor = .red
+        alertLabel.translatesAutoresizingMaskIntoConstraints = false
+        alertLabel.textAlignment = .center
+        setAlertLabelConstraints()
+    }
+    
+    private func setAlertLabelConstraints() {
+        addSubview(alertLabel)
+        alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10).isActive = true
+        alertLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        alertLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        alertLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+    }
+    
+    
     //MARK: - Interface
     
     func getTextFieldInput() -> (String, String)? {
@@ -86,6 +105,15 @@ class LoginView: LogView {
     func cleanTextField() {
         mailTextField.textField.text = nil
         passwordTextField.textField.text = nil
+    }
+    
+    func showAlert(for error: LogError) {
+        switch error {
+        case .incorrectData:
+            alertLabel.text = "Incorrect password or email"
+        case .noAccount:
+            break
+        }
     }
 
 }

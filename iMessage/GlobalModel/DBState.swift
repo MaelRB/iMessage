@@ -10,5 +10,5 @@ import Foundation
 
 enum DBState {
     case successed
-    case failed(Error)
+    case failed(LogError)
 }

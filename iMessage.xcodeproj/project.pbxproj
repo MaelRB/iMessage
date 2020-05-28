@@ -17,6 +17,7 @@
 		8A9DDDB7247E9EA300745539 /* DBCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB6247E9EA300745539 /* DBCommunication.swift */; };
 		8A9DDDB9247E9F8100745539 /* DBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB8247E9F8100745539 /* DBState.swift */; };
 		8A9DDDDC247FF95E00745539 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A9DDDDB247FF95D00745539 /* loading.json */; };
+		8A9DDDDE2480006800745539 /* LogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDDD2480006800745539 /* LogError.swift */; };
 		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
 		8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B3247D7FD90062CC93 /* LogView.swift */; };
 		8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B5247D80050062CC93 /* MRBTextField.swift */; };
@@ -56,6 +57,7 @@
 		8A9DDDB6247E9EA300745539 /* DBCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCommunication.swift; sourceTree = "<group>"; };
 		8A9DDDB8247E9F8100745539 /* DBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBState.swift; sourceTree = "<group>"; };
 		8A9DDDDB247FF95D00745539 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		8A9DDDDD2480006800745539 /* LogError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogError.swift; sourceTree = "<group>"; };
 		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
 		8AA618B3247D7FD90062CC93 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		8AA618B5247D80050062CC93 /* MRBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRBTextField.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				8AA618B3247D7FD90062CC93 /* LogView.swift */,
 				8AA618B5247D80050062CC93 /* MRBTextField.swift */,
 				8AA618B7247D80180062CC93 /* LoginView.swift */,
+				8A9DDDDD2480006800745539 /* LogError.swift */,
 				8AA618BA247D804C0062CC93 /* LogScreenStateButton.swift */,
 				8AA618BD247D80AB0062CC93 /* RegisterView.swift */,
 				8AA618BF247D80CE0062CC93 /* UIStackViewExt.swift */,
@@ -413,6 +416,7 @@
 				8AA618BB247D804C0062CC93 /* LogScreenStateButton.swift in Sources */,
 				8AA618CA247D81550062CC93 /* LogScreenState.swift in Sources */,
 				8A69158D2461F10200616595 /* SceneDelegate.swift in Sources */,
+				8A9DDDDE2480006800745539 /* LogError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

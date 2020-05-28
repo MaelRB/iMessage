@@ -174,7 +174,12 @@ class LogScreenViewController: UIViewController {
         case .successed:
             performSegue(withIdentifier: "goToDiscussion", sender: self)
         case .failed(_):
-            break
+            switch screenState {
+            case .login:
+                loginView.showAlert(for: .incorrectData)
+            case .register:
+                loginView.showAlert(for: .noAccount)
+            }
         }
     }
     
