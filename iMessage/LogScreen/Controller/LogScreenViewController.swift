@@ -24,8 +24,6 @@ class LogScreenViewController: UIViewController {
 
     var logView: LogView!
     
-    var screenState = LogScreenState.login
-    
     var isFirstLaunch = true
 
     // MARK: - View methods
@@ -89,9 +87,10 @@ class LogScreenViewController: UIViewController {
     
     @objc func checkButtonTapped() {
         view.endEditing(true)
+        logView.showAlert(with: "")
         logView.logButton.loading()
         guard let logInfo = logView.getTextFieldInput() else { return }
-        logicController.log(email: logInfo.0, password: logInfo.1, with: screenState) { (state) in
+        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.screen) { (state) in
             self.logView.logButton.stopLoading()
             self.render(state)
         }
@@ -122,13 +121,8 @@ class LogScreenViewController: UIViewController {
         switch state {
         case .successed:
             performSegue(withIdentifier: "goToDiscussion", sender: self)
-        case .failed(_):
-            switch screenState {
-            case .login:
-                logView.showAlert(for: .incorrectData)
-            case .register:
-                logView.showAlert(for: .noAccount)
-            }
+        case .failed(localizedDescription: let localizedDescription):
+            logView.showAlert(with: localizedDescription)
         }
     }
     

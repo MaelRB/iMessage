@@ -10,5 +10,5 @@ import Foundation
 
 enum DBState {
     case successed
-    case failed(LogError)
+    case failed(localizedDescription: String)
 }

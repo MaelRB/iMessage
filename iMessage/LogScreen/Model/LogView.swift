@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum Screen: String {
-    case login = "Login"
-    case register = "Register"
-}
-
 class LogView: UIView {
     
     //MARK: - UI elements
@@ -60,16 +55,12 @@ class LogView: UIView {
     private func setup() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .clear
-        setStackView()
         setTitle()
         setMailtextField()
         setUsername()
         setPasswordtextField()
-        stackView.addArrangedSubview(usernameTextField)
-        stackView.addArrangedSubview(mailTextField)
-        stackView.addArrangedSubview(passwordTextField)
+        setStackView()
         setStackViewConstraints()
-        title.text = screen.rawValue
         setCheckButton()
         setScreenButton()
         setAlertLabel()
@@ -129,13 +120,14 @@ class LogView: UIView {
         alertLabel.textColor = .red
         alertLabel.translatesAutoresizingMaskIntoConstraints = false
         alertLabel.textAlignment = .center
+        alertLabel.numberOfLines = 0
         setAlertLabelConstraints()
     }
     
     private func setAlertLabelConstraints() {
         addSubview(alertLabel)
         alertLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10).isActive = true
-        alertLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        alertLabel.bottomAnchor.constraint(equalTo: screenButton.topAnchor, constant: -10).isActive = true
         alertLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         alertLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
     }
@@ -147,6 +139,9 @@ class LogView: UIView {
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.customize(backgroundColor: .white, radiusSize: Constant.Size.textFieldSize.height / 1.6)
+        stackView.addArrangedSubview(usernameTextField)
+        stackView.addArrangedSubview(mailTextField)
+        stackView.addArrangedSubview(passwordTextField)
     }
     
     private func setTitle() {
@@ -155,6 +150,7 @@ class LogView: UIView {
         title.translatesAutoresizingMaskIntoConstraints = false
         setTitleConstraints()
         title.font = Constant.Font.titleFont
+        title.text = screen.rawValue
     }
     
     private func setTitleConstraints() {
@@ -252,12 +248,7 @@ class LogView: UIView {
         passwordTextField.textField.text = nil
     }
     
-    func showAlert(for error: LogError) {
-        switch error {
-        case .incorrectData:
-            alertLabel.text = "Incorrect password or email"
-        case .noAccount:
-            break
-        }
+    func showAlert(with text: String) {
+        alertLabel.text = text
     }
 }

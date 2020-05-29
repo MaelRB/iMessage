@@ -17,7 +17,7 @@ struct DBCommunication {
     static func register(email: String, password: String, then handler: @escaping Handler) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
-                handler(.failed(.incorrectData))
+                handler(.failed(localizedDescription: error!.localizedDescription))
             } else {
                 handler(.successed)
             }
@@ -27,7 +27,7 @@ struct DBCommunication {
     static func login(email: String, password: String, then handler: @escaping Handler) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if error != nil {
-                handler(.failed(.incorrectData))
+                handler(.failed(localizedDescription: error!.localizedDescription))
             } else {
                 handler(.successed)
             }
