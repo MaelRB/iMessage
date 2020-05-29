@@ -30,6 +30,7 @@ Fix keyboards Issues, add logScreen and improve code quality.
 - I implemented the logScreen that I had previously created inisde another project.
 - I regrouped every firebase functions responsible for the communication with the data base inside a unique class called DBCommunication. It allows to get cleaner and better maintainability.
 
+<img width="408" alt="Screenshot 2020-05-29 at 13 48 48" src="https://user-images.githubusercontent.com/38114983/83257330-7b1e7400-a1b4-11ea-9402-62c66c90abd8.png">
 
 
 
