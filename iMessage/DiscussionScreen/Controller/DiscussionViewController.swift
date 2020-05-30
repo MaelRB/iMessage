@@ -27,11 +27,13 @@ class DiscussionViewController: UIViewController {
         
         setCreateDiscussionButton()
         
+        view.backgroundColor = Constant.Color.background
+        
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.register(DiscussionCell.self, forCellReuseIdentifier: "discussionCell")
         tableView.separatorStyle = .none
+        tableView.backgroundColor = Constant.Color.background
         
         loadDiscussion()
         
@@ -101,6 +103,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discussionCell", for: indexPath) as! DiscussionCell
 //        cell.textLabel?.text = discussions[indexPath.row].to.pseudo
         cell.setup()
+        cell.setName(discussions[indexPath.row].to.pseudo)
         return cell
     }
     
@@ -120,5 +123,17 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = Constant.Color.background
+        return view
+    }
+    
+    
 }
 

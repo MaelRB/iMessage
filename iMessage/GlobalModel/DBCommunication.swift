@@ -14,6 +14,8 @@ struct DBCommunication {
     
     let dataBase = Firestore.firestore()
     
+    //MARK: - Connection methods
+    
     static func register(email: String, password: String, then handler: @escaping Handler) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
@@ -33,6 +35,20 @@ struct DBCommunication {
             }
         }
     }
+    
+    func logout(_ handler: @escaping () -> Void) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            handler()
+        }
+        catch
+            let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    //MARK: - Discussion methods
     
     func loadDiscussion(_ handler: @escaping ([Discussion]) -> Void) {
         var discussions = [Discussion]()
@@ -80,17 +96,7 @@ struct DBCommunication {
         return nil
     }
     
-    func logout(_ handler: @escaping () -> Void) {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            handler()
-        }
-        catch
-            let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
+    
     
     func deleteDiscussion(_ discussion: Discussion) {
         dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).delete { (error) in
@@ -100,5 +106,38 @@ struct DBCommunication {
         }
     }
     
+    //MARK: - Messages methods
     
+    func loadMessages(for discussion: Discussion, handler: @escaping ([Message]) -> Void) {
+        let query = dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).collection(Constant.FStore.messagesCollection).order(by: Constant.FStore.date)
+        query.addSnapshotListener { (snapshot, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                let messages = self.extractMessages(for: snapshot!)
+                handler(messages)
+            }
+        }
+    }
+    
+    private func extractMessages(for snapshot: QuerySnapshot) -> [Message] {
+        var messages = [Message]()
+        for doc in snapshot.documents {
+            let data = doc.data()
+            guard let body = data[Constant.FStore.messageBody] as? String,
+                  let sender = data[Constant.FStore.messageSender] as? String
+                else { continue }
+            let message = Message(body: body, sender: sender)
+            messages.append(message)
+        }
+        return messages
+    }
+    
+    func sendMessage(_ message: Message, in discussion: Discussion) {
+        dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).collection(Constant.FStore.messagesCollection).addDocument(data: [
+            Constant.FStore.messageBody: message.body,
+            Constant.FStore.messageSender: message.sender,
+            Constant.FStore.date: Date().timeIntervalSince1970
+        ])
+    }
 }

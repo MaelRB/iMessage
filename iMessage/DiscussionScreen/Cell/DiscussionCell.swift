@@ -56,6 +56,7 @@ class DiscussionCell: UITableViewCell {
     }
     
     private func setName() {
+        backgroundColor = Constant.Color.background
         nameLabel = UILabel()
         nameLabel.text = "Name"
         nameLabel.font = .boldSystemFont(ofSize: 16)
@@ -101,5 +102,11 @@ class DiscussionCell: UITableViewCell {
         date.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         date.widthAnchor.constraint(equalToConstant: 50).isActive = true
         date.heightAnchor.constraint(equalToConstant: logoSize / 2).isActive = true
+    }
+    
+    // MARK: - Interface
+    
+    func setName(_ name: String) {
+        nameLabel.text = name
     }
 }

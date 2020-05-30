@@ -20,6 +20,8 @@ class MessageViewController: UIViewController {
     // MARK: Other properties
     let db = Firestore.firestore()
     
+    let dbCommunication = DBCommunication()
+    
     var discussion: Discussion?
     
     var messages = [Message]()
@@ -37,8 +39,18 @@ class MessageViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .onDrag
         
-        loadMessages()
+        dbCommunication.loadMessages(for: discussion!) { (messages) in
+            self.messages = messages
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                if self.messages.count > 0 {
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+                }
+            }
+        }
         
+        // Manage keyboard
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -71,47 +83,10 @@ class MessageViewController: UIViewController {
     
     func send() {
         let message = Message(body: messageTextField.text!, sender: Auth.auth().currentUser!.email!)
-        addMessage(message)
+        dbCommunication.sendMessage(message, in: discussion!)
         messages.append(message)
         messageTextField.text = ""
     }
-    
-    //MARK: - Firestore methods
-    
-    func addMessage(_ message: Message) {
-        db.collection(Constant.FStore.discussionCollection).document(discussion!.id).collection(Constant.FStore.messagesCollection).addDocument(data: [
-            Constant.FStore.messageBody: message.body,
-            Constant.FStore.messageSender: message.sender,
-            Constant.FStore.date: Date().timeIntervalSince1970
-        ])
-    }
-    
-    func loadMessages() {
-        db.collection(Constant.FStore.discussionCollection).document(discussion!.id).collection(Constant.FStore.messagesCollection).order(by: Constant.FStore.date).addSnapshotListener { (snapshot, error) in
-            self.messages = []
-            if error != nil {
-                print(error!)
-            } else {
-                for doc in snapshot!.documents {
-                    let data = doc.data()
-                    guard let body = data[Constant.FStore.messageBody] as? String,
-                        let sender = data[Constant.FStore.messageSender] as? String
-                        else { return }
-                    let message = Message(body: body, sender: sender)
-                    self.messages.append(message)
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        if self.messages.count > 0 {
-                            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                            self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
     
 }
 
