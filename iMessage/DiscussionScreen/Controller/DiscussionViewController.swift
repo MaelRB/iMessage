@@ -24,7 +24,8 @@ class DiscussionViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutUser))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(addDiscussion))
+        
+        setCreateDiscussionButton()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,6 +37,24 @@ class DiscussionViewController: UIViewController {
         
         self.title = "Messages"
         
+    }
+    
+    func setCreateDiscussionButton() {
+        let rightButton = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 24)
+        rightButton.setImage(UIImage(systemName: "square.and.pencil", withConfiguration: config), for: .normal)
+        rightButton.addTarget(self, action: #selector(addDiscussion), for: .touchUpInside)
+        navigationController?.navigationBar.addSubview(rightButton)
+        rightButton.tag = 1
+        rightButton.frame = CGRect(x: self.view.frame.width, y: 0, width: 120, height: 20)
+
+        let targetView = self.navigationController?.navigationBar
+
+        let trailingContraint = NSLayoutConstraint(item: rightButton, attribute:
+            .trailingMargin, relatedBy: .equal, toItem: targetView, attribute: .trailingMargin, multiplier: 1.0, constant: -20)
+        let bottomConstraint = NSLayoutConstraint(item: rightButton, attribute: .bottom, relatedBy: .equal, toItem: targetView, attribute: .bottom, multiplier: 1.0, constant: -15)
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([trailingContraint, bottomConstraint])
     }
     
     @objc func addDiscussion() {
