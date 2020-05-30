@@ -29,7 +29,12 @@ class DiscussionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.register(DiscussionCell.self, forCellReuseIdentifier: "discussionCell")
+        tableView.separatorStyle = .none
+        
         loadDiscussion()
+        
+        self.title = "Messages"
         
     }
     
@@ -74,8 +79,9 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = discussions[indexPath.row].to.pseudo
+        let cell = tableView.dequeueReusableCell(withIdentifier: "discussionCell", for: indexPath) as! DiscussionCell
+//        cell.textLabel?.text = discussions[indexPath.row].to.pseudo
+        cell.setup()
         return cell
     }
     
@@ -90,6 +96,10 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
             dbCommunication.deleteDiscussion(eltRemoved)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 

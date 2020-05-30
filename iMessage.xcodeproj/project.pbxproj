@@ -18,6 +18,7 @@
 		8A9DDDB9247E9F8100745539 /* DBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB8247E9F8100745539 /* DBState.swift */; };
 		8A9DDDDC247FF95E00745539 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A9DDDDB247FF95D00745539 /* loading.json */; };
 		8A9DDDE12480F63D00745539 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDE02480F63D00745539 /* Screen.swift */; };
+		8A9DDDE424825EDA00745539 /* DiscussionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDE324825EDA00745539 /* DiscussionCell.swift */; };
 		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
 		8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B3247D7FD90062CC93 /* LogView.swift */; };
 		8AA618B6247D80050062CC93 /* MRBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B5247D80050062CC93 /* MRBTextField.swift */; };
@@ -55,6 +56,7 @@
 		8A9DDDB8247E9F8100745539 /* DBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBState.swift; sourceTree = "<group>"; };
 		8A9DDDDB247FF95D00745539 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		8A9DDDE02480F63D00745539 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		8A9DDDE324825EDA00745539 /* DiscussionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionCell.swift; sourceTree = "<group>"; };
 		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
 		8AA618B3247D7FD90062CC93 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		8AA618B5247D80050062CC93 /* MRBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MRBTextField.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		8A9DDDB2247E9DBD00745539 /* DiscussionScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8A9DDDE224825E7B00745539 /* Cell */,
 				8A9DDDB3247E9DF700745539 /* Controller */,
 			);
 			path = DiscussionScreen;
@@ -179,6 +182,14 @@
 				8AA618C1247D80E30062CC93 /* CheckButton.swift */,
 			);
 			path = "LogView UI model";
+			sourceTree = "<group>";
+		};
+		8A9DDDE224825E7B00745539 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8A9DDDE324825EDA00745539 /* DiscussionCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8AA618AE247D7F3B0062CC93 /* LogScreen */ = {
@@ -393,6 +404,7 @@
 				8AAB8EBB246993E1006C8244 /* Constant.swift in Sources */,
 				8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */,
 				8AAB8EB22469865A006C8244 /* DiscussionViewController.swift in Sources */,
+				8A9DDDE424825EDA00745539 /* DiscussionCell.swift in Sources */,
 				8AAB8EC12469B6CF006C8244 /* MessageCell.swift in Sources */,
 				8AA618C8247D812F0062CC93 /* BottomCurveView.swift in Sources */,
 				8AAB8EBD24699794006C8244 /* MessageViewController.swift in Sources */,
