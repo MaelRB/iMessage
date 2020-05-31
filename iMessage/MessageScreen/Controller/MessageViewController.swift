@@ -95,7 +95,7 @@ class MessageViewController: UIViewController {
     }
     
     func send() {
-        let message = Message(body: messageTextField.text!, sender: Auth.auth().currentUser!.email!)
+        let message = Message(body: messageTextField.text!, sender: Auth.auth().currentUser!.email!, date: Date(timeIntervalSince1970: Date().timeIntervalSince1970))
         dbCommunication.sendMessage(message, in: discussion!)
         messages.append(message)
         messageTextField.text = ""

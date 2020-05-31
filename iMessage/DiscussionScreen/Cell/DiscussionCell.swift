@@ -14,7 +14,7 @@ class DiscussionCell: UITableViewCell {
     private var logoImage: UIImageView!
     private var nameLabel: UILabel!
     private var lastMessageLabel: UILabel!
-    private var date: UILabel!
+    private var dateLabel: UILabel!
     
     var logoSize: CGFloat!
     
@@ -89,19 +89,20 @@ class DiscussionCell: UITableViewCell {
     }
     
     private func setDate() {
-        date = UILabel()
-        date.text = "9:42"
-        date.font = .systemFont(ofSize: 14)
+        dateLabel = UILabel()
+        dateLabel.text = "9:42"
+        dateLabel.font = .systemFont(ofSize: 14)
+        dateLabel.textAlignment = .right
         setDateConstraints()
     }
     
     private func setDateConstraints() {
-        addSubview(date)
-        date.translatesAutoresizingMaskIntoConstraints = false
-        date.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
-        date.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        date.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        date.heightAnchor.constraint(equalToConstant: logoSize / 2).isActive = true
+        addSubview(dateLabel)
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+        dateLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        dateLabel.heightAnchor.constraint(equalToConstant: logoSize / 2).isActive = true
     }
     
     // MARK: - Interface
@@ -114,14 +115,27 @@ class DiscussionCell: UITableViewCell {
         lastMessageLabel.text = name
     }
     
-    func setDate(_ date: String) {
-        // To do
+    func setDate(_ date: Date) {
+        let dateFormatter = DateFormatter()
+        if isLessThanDay(date) {
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .short
+        } else {
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .none
+        }
+        
+        dateLabel.text = dateFormatter.string(from: date)
+    }
+    
+    private func isLessThanDay(_ date: Date) -> Bool {
+        return date.timeIntervalSince1970 - Date().timeIntervalSince1970 <= 86_400 ? true : false
     }
     
     override func prepareForReuse() {
         logoImage.removeFromSuperview()
         nameLabel.removeFromSuperview()
         lastMessageLabel.removeFromSuperview()
-        date.removeFromSuperview()
+        dateLabel.removeFromSuperview()
     }
 }

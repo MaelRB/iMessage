@@ -11,4 +11,5 @@ import Foundation
 struct Message {
     var body: String
     var sender: String
+    var date: Date 
 }

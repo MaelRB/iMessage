@@ -109,6 +109,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setup()
         cell.setName(discussions[indexPath.row].to.pseudo)
         cell.setLastMessage(discussions[indexPath.row].lastMessage)
+        cell.setDate(discussions[indexPath.row].date)
         return cell
     }
     

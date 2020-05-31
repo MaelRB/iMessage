@@ -62,13 +62,13 @@ struct DBCommunication {
                     guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { return }
                     guard let user = self.getParticipant(of: participant) else { return }
                     guard let id = data[Constant.FStore.discussionID] as? String else { return }
-//                    guard let date = data[Constant.FStore.date] as? String else { return }
+                    guard let time = data[Constant.FStore.date] as? TimeInterval else { return }
+                    let date = Date(timeIntervalSince1970: time)
                     guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { return }
-                    let discussion = Discussion(id: id, to: user, date: "", lastMessage: lastMessage)
+                    let discussion = Discussion(id: id, to: user, date: date, lastMessage: lastMessage)
                     discussions.append(discussion)
                 }
             }
-            
             handler(discussions)
         }
     }
@@ -116,8 +116,8 @@ struct DBCommunication {
         }
     }
     
-    private func updateLastMessage(_ discussion: Discussion, message: String) {
-        dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).updateData([Constant.FStore.lastMessageDiscussion: message])
+    private func updateLastMessage(_ discussion: Discussion, message: Message) {
+        dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).updateData([Constant.FStore.lastMessageDiscussion: message.body, Constant.FStore.date: message.date.timeIntervalSince1970])
     }
     
     //MARK: - Messages methods
@@ -139,9 +139,11 @@ struct DBCommunication {
         for doc in snapshot.documents {
             let data = doc.data()
             guard let body = data[Constant.FStore.messageBody] as? String,
-                  let sender = data[Constant.FStore.messageSender] as? String
+                  let sender = data[Constant.FStore.messageSender] as? String,
+                  let time = data[Constant.FStore.date] as? TimeInterval
                 else { continue }
-            let message = Message(body: body, sender: sender)
+            let date = Date(timeIntervalSince1970: time)
+            let message = Message(body: body, sender: sender, date: date)
             messages.append(message)
         }
         return messages
@@ -151,8 +153,8 @@ struct DBCommunication {
         dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).collection(Constant.FStore.messagesCollection).addDocument(data: [
             Constant.FStore.messageBody: message.body,
             Constant.FStore.messageSender: message.sender,
-            Constant.FStore.date: Date().timeIntervalSince1970
+            Constant.FStore.date: message.date.timeIntervalSince1970
         ])
-        updateLastMessage(discussion, message: message.body)
+        updateLastMessage(discussion, message: message)
     }
 }
