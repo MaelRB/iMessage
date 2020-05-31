@@ -25,8 +25,6 @@ class DiscussionViewController: UIViewController {
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutUser))
         
-        setCreateDiscussionButton()
-        
         view.backgroundColor = Constant.Color.background
         
         tableView.delegate = self
@@ -39,6 +37,11 @@ class DiscussionViewController: UIViewController {
         
         self.title = "Messages"
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setCreateDiscussionButton()
     }
     
     func setCreateDiscussionButton() {
@@ -70,7 +73,9 @@ class DiscussionViewController: UIViewController {
     func loadDiscussion() {
         dbCommunication.loadDiscussion { (discussions) in
             self.discussions = discussions
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -101,9 +106,9 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discussionCell", for: indexPath) as! DiscussionCell
-//        cell.textLabel?.text = discussions[indexPath.row].to.pseudo
         cell.setup()
         cell.setName(discussions[indexPath.row].to.pseudo)
+        cell.setLastMessage(discussions[indexPath.row].lastMessage)
         return cell
     }
     

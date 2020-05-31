@@ -56,6 +56,19 @@ class MessageViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        removeRightButton()
+    }
+    
+    func removeRightButton(){
+        guard let subviews = self.navigationController?.navigationBar.subviews else { return }
+        for view in subviews {
+            if view.tag != 0 {
+                view.removeFromSuperview()
+            }
+        }
+    }
+    
     @IBAction func sendButtonTapped(_ sender: Any) {
         send()
     }

@@ -51,9 +51,9 @@ struct DBCommunication {
     //MARK: - Discussion methods
     
     func loadDiscussion(_ handler: @escaping ([Discussion]) -> Void) {
-        var discussions = [Discussion]()
         let discussionRef = dataBase.collection(Constant.FStore.discussionCollection).whereField(Constant.FStore.discussionParticipant, arrayContains: Auth.auth().currentUser!.email!)
         discussionRef.order(by: Constant.FStore.date, descending: true).addSnapshotListener { (snapshot, error) in
+            var discussions = [Discussion]()
             if error != nil {
                 print(error!.localizedDescription)
             } else {
@@ -62,14 +62,14 @@ struct DBCommunication {
                     guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { return }
                     guard let user = self.getParticipant(of: participant) else { return }
                     guard let id = data[Constant.FStore.discussionID] as? String else { return }
-                    let discussion = Discussion(id: id, to: user)
+//                    guard let date = data[Constant.FStore.date] as? String else { return }
+                    guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { return }
+                    let discussion = Discussion(id: id, to: user, date: "", lastMessage: lastMessage)
                     discussions.append(discussion)
                 }
             }
             
-            DispatchQueue.main.async {
-                handler(discussions)
-            }
+            handler(discussions)
         }
     }
     
@@ -96,6 +96,16 @@ struct DBCommunication {
         return nil
     }
     
+    func creatDiscussion(with participant: String) {
+        let id = dataBase.collection(Constant.FStore.discussionCollection).addDocument(data: [
+            Constant.FStore.discussionParticipant: [Auth.auth().currentUser!.email!, participant],
+            Constant.FStore.date: Date().timeIntervalSince1970,
+            Constant.FStore.lastMessageDiscussion: ""]
+        ).documentID
+        
+        // Get the id of the discussion. It's used to send a message to the good discussion
+        dataBase.collection(Constant.FStore.discussionCollection).document(id).updateData([Constant.FStore.discussionID: id])
+    }
     
     
     func deleteDiscussion(_ discussion: Discussion) {
@@ -104,6 +114,10 @@ struct DBCommunication {
                 print(error!)
             }
         }
+    }
+    
+    private func updateLastMessage(_ discussion: Discussion, message: String) {
+        dataBase.collection(Constant.FStore.discussionCollection).document(discussion.id).updateData([Constant.FStore.lastMessageDiscussion: message])
     }
     
     //MARK: - Messages methods
@@ -139,5 +153,6 @@ struct DBCommunication {
             Constant.FStore.messageSender: message.sender,
             Constant.FStore.date: Date().timeIntervalSince1970
         ])
+        updateLastMessage(discussion, message: message.body)
     }
 }

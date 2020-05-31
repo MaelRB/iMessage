@@ -15,6 +15,8 @@ class CreateDiscussionViewController: UIViewController {
     
     var discussions = [Discussion]()
     
+    let dbCommunication = DBCommunication()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,21 +31,9 @@ class CreateDiscussionViewController: UIViewController {
                 self.textField.layer.borderColor = UIColor.black.cgColor
             }
         } else {
-            creatDiscussion()
+            dbCommunication.creatDiscussion(with: textField!.text!)
+            dismiss(animated: true, completion: nil)
         }
-    }
-    
-    func creatDiscussion() {
-        let db = Firestore.firestore()
-        
-        let id = db.collection(Constant.FStore.discussionCollection).addDocument(data: [
-            Constant.FStore.discussionParticipant: [Auth.auth().currentUser!.email!, textField.text!],
-            Constant.FStore.date: Date().timeIntervalSince1970]
-        ).documentID
-        
-        db.collection(Constant.FStore.discussionCollection).document(id).updateData([Constant.FStore.discussionID: id])
-        
-        dismiss(animated: true, completion: nil)
     }
     
     func isDiscussionAlreadyExist() -> Bool {

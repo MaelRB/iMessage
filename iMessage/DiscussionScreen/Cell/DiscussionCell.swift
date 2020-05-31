@@ -109,4 +109,19 @@ class DiscussionCell: UITableViewCell {
     func setName(_ name: String) {
         nameLabel.text = name
     }
+    
+    func setLastMessage(_ name: String) {
+        lastMessageLabel.text = name
+    }
+    
+    func setDate(_ date: String) {
+        // To do
+    }
+    
+    override func prepareForReuse() {
+        logoImage.removeFromSuperview()
+        nameLabel.removeFromSuperview()
+        lastMessageLabel.removeFromSuperview()
+        date.removeFromSuperview()
+    }
 }

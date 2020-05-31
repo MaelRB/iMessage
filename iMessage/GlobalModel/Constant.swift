@@ -23,6 +23,7 @@ struct Constant {
         static let discussionCollection = "discussion"
         static let discussionParticipant = "participant"
         static let discussionID = "id"
+        static let lastMessageDiscussion = "lastMessage"
         static let messagesCollection = "messages"
         static let messageBody = "body"
         static let date = "date"
