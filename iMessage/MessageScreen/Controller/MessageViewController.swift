@@ -31,6 +31,7 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
     
         navigationItem.title = discussion!.to.pseudo
+        navigationController?.navigationBar.tintColor = Constant.Color.tappable
         
         tableView.delegate = self
         tableView.dataSource = self

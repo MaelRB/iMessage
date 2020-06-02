@@ -132,7 +132,7 @@ class DiscussionCell: UITableViewCell {
     }
     
     private func isLessThanDay(_ date: Date) -> Bool {
-        return date.timeIntervalSince1970 - Date().timeIntervalSince1970 <= 86_400 ? true : false
+        return Date().timeIntervalSince1970 - date.timeIntervalSince1970 <= 86_400 ? true : false
     }
     
     override func prepareForReuse() {

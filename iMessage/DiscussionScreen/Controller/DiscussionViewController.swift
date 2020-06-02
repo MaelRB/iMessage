@@ -24,6 +24,7 @@ class DiscussionViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutUser))
+        navigationController?.navigationBar.tintColor = Constant.Color.tappable
         
         view.backgroundColor = Constant.Color.background
         
