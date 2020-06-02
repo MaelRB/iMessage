@@ -25,6 +25,9 @@ class LogScreenViewController: UIViewController {
     var logView: LogView!
     
     var isFirstLaunch = true
+    
+    // Discussions are load before segue
+    var discussions = [Discussion]()
 
     // MARK: - View methods
     override func viewDidLoad() {
@@ -90,7 +93,10 @@ class LogScreenViewController: UIViewController {
         logView.showAlert(with: "")
         logView.logButton.loading()
         guard let logInfo = logView.getTextFieldInput() else { return }
-        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.screen) { (state) in
+        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.screen) { (state, discussions)  in
+            if let discussions = discussions {
+                self.discussions = discussions
+            }
             self.logView.logButton.stopLoading()
             self.render(state)
         }
@@ -120,9 +126,17 @@ class LogScreenViewController: UIViewController {
     func render(_ state: DBState) {
         switch state {
         case .successed:
-            performSegue(withIdentifier: "goToDiscussion", sender: self)
+            self.performSegue(withIdentifier: "goToDiscussion", sender: self.self)
         case .failed(localizedDescription: let localizedDescription):
             logView.showAlert(with: localizedDescription)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDiscussion" {
+            if let vc = segue.destination as? DiscussionViewController {
+                vc.discussions = discussions
+            }
         }
     }
     

@@ -33,8 +33,6 @@ class DiscussionViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = Constant.Color.background
         
-        loadDiscussion()
-        
         self.title = "Messages"
         
     }
@@ -66,17 +64,6 @@ class DiscussionViewController: UIViewController {
         weak var vc = storyboard?.instantiateViewController(identifier: "createDiscussion") as? CreateDiscussionViewController
         vc?.discussions = discussions
         showDetailViewController(vc!, sender: self)
-    }
-    
-    //MARK: - Firebase methods
-    
-    func loadDiscussion() {
-        dbCommunication.loadDiscussion { (discussions) in
-            self.discussions = discussions
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     @objc func logoutUser() {
@@ -127,7 +114,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 90
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

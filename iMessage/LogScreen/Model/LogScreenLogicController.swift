@@ -9,17 +9,19 @@
 import UIKit
 
 class LogScreenLogicController {
-    typealias Handler = (DBState) -> Void
+    let dbCommunication = DBCommunication()
     
-    func log(email: String, password: String, for screen: Screen , then handler: @escaping Handler) {
+    func log(email: String, password: String, for screen: Screen , then handler: @escaping (DBState, [Discussion]?) -> Void) {
         switch screen {
         case .login:
             DBCommunication.login(email: email, password: password) { (state) in
-                handler(state)
+                self.dbCommunication.loadDiscussion { (discussions) in
+                    handler(state, discussions)
+                }
             }
         case .register:
             DBCommunication.register(email: email, password: password) { (state) in
-                handler(state)
+                handler(state, nil)
             }
         }
     }

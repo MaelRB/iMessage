@@ -39,10 +39,13 @@ class DiscussionCell: UITableViewCell {
     
     private func setLogo() {
         logoImage = UIImageView()
-        let config = UIImage.SymbolConfiguration(pointSize: 16)
-        logoImage.image = UIImage(systemName: "person.circle", withConfiguration: config)
+//        let config = UIImage.SymbolConfiguration(pointSize: 16)
+//        logoImage.image = UIImage(systemName: "person.circle", withConfiguration: config)
+        logoImage.image = UIImage(named: "profil2")
         logoImage.tintColor = .black
+        logoImage.contentMode = .scaleAspectFill
         logoImage.layer.cornerRadius = logoSize / 2
+        logoImage.layer.masksToBounds = true
         setLogoConstraints()
     }
     
@@ -50,8 +53,8 @@ class DiscussionCell: UITableViewCell {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         addSubview(logoImage)
         logoImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        logoImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
+        logoImage.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        logoImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         logoImage.widthAnchor.constraint(equalToConstant: logoSize).isActive = true
     }
     
@@ -68,7 +71,7 @@ class DiscussionCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.leftAnchor.constraint(equalTo: logoImage.rightAnchor, constant: 10).isActive = true
         nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: logoSize / 2).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: logoSize / 3).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
     
@@ -99,7 +102,7 @@ class DiscussionCell: UITableViewCell {
     private func setDateConstraints() {
         addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
         dateLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         dateLabel.heightAnchor.constraint(equalToConstant: logoSize / 2).isActive = true
