@@ -43,21 +43,25 @@ class DiscussionViewController: UIViewController {
     }
     
     func setCreateDiscussionButton() {
+        let targetView = self.navigationController?.navigationBar
         let rightButton = UIButton()
-        let config = UIImage.SymbolConfiguration(pointSize: 24)
+        let config = UIImage.SymbolConfiguration(pointSize: 18)
         rightButton.setImage(UIImage(systemName: "square.and.pencil", withConfiguration: config), for: .normal)
         rightButton.addTarget(self, action: #selector(addDiscussion), for: .touchUpInside)
         navigationController?.navigationBar.addSubview(rightButton)
         rightButton.tag = 1
-        rightButton.frame = CGRect(x: self.view.frame.width, y: 0, width: 120, height: 20)
+        rightButton.backgroundColor = Constant.Color.tappable
+        rightButton.tintColor = Constant.Color.background
 
-        let targetView = self.navigationController?.navigationBar
-
+        rightButton.layer.cornerRadius = (targetView!.frame.height * 0.66) / 2
+        
         let trailingContraint = NSLayoutConstraint(item: rightButton, attribute:
             .trailingMargin, relatedBy: .equal, toItem: targetView, attribute: .trailingMargin, multiplier: 1.0, constant: -20)
         let bottomConstraint = NSLayoutConstraint(item: rightButton, attribute: .bottom, relatedBy: .equal, toItem: targetView, attribute: .bottom, multiplier: 1.0, constant: -15)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([trailingContraint, bottomConstraint])
+        rightButton.heightAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
+        rightButton.widthAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
     }
     
     @objc func addDiscussion() {
