@@ -18,9 +18,7 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var bottomConstraints: NSLayoutConstraint!
     
     // MARK: Other properties
-    let db = Firestore.firestore()
-    
-    let dbCommunication = DBCommunication()
+    let dbCommunication = DBCommunication.sharedInstance
     
     var discussion: Discussion?
     

@@ -14,6 +14,8 @@ struct DBCommunication {
     
     let dataBase = Firestore.firestore()
     
+    static let sharedInstance = DBCommunication()
+    
     //MARK: - Connection methods
     
     static func register(email: String, password: String, then handler: @escaping Handler) {

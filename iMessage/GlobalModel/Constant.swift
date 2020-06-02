@@ -69,6 +69,9 @@ struct Constant {
         static let bottomCurveGradient = { (rect: CGRect) -> UIColor in
             return UIColor(gradientStyle: .leftToRight, withFrame: rect, andColors: [Color().lightCyan, Color().darkCyan])
         }
+        
+        static let sendMessage = UIColor(displayP3Red: 0.29, green: 0.58, blue: 0.96, alpha: 1)
+        static let receiveMessage = UIColor(displayP3Red: 0.91, green: 0.91, blue: 0.92, alpha: 1)
     }
     
     

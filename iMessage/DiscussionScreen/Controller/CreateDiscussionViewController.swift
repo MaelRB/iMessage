@@ -15,7 +15,7 @@ class CreateDiscussionViewController: UIViewController {
     
     var discussions = [Discussion]()
     
-    let dbCommunication = DBCommunication()
+    let dbCommunication = DBCommunication.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()

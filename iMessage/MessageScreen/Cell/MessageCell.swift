@@ -47,13 +47,13 @@ class MessageCell: UITableViewCell {
         setupView()
         if message.sender == Auth.auth().currentUser!.email! {
             view.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            view.backgroundColor = .systemBlue
+            view.backgroundColor = Constant.Color.sendMessage
             setupBody()
             body.text = message.body
             body.textColor = .white
         } else {
             view.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-            view.backgroundColor = .lightGray
+            view.backgroundColor = Constant.Color.receiveMessage
             setupBody()
             body.text = message.body
             body.textColor = .black

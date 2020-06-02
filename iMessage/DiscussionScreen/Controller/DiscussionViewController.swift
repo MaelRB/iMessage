@@ -13,7 +13,7 @@ class DiscussionViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let dbCommunication = DBCommunication()
+    let dbCommunication = DBCommunication.sharedInstance
     
     var discussions = [Discussion]()
     

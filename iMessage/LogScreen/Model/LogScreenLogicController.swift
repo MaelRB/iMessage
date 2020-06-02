@@ -9,7 +9,7 @@
 import UIKit
 
 class LogScreenLogicController {
-    let dbCommunication = DBCommunication()
+    let dbCommunication = DBCommunication.sharedInstance
     
     func log(email: String, password: String, for screen: Screen , then handler: @escaping (DBState, [Discussion]?) -> Void) {
         switch screen {
