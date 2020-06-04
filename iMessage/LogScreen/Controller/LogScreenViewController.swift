@@ -93,7 +93,7 @@ class LogScreenViewController: UIViewController {
         logView.showAlert(with: "")
         logView.logButton.loading()
         guard let logInfo = logView.getTextFieldInput() else { return }
-        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.screen) { (state, discussions)  in
+        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.method) { (state, discussions)  in
             if let discussions = discussions {
                 self.discussions = discussions
             }

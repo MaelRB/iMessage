@@ -11,8 +11,8 @@ import UIKit
 class LogScreenLogicController {
     let dbCommunication = DBCommunication.sharedInstance
     
-    func log(email: String, password: String, for screen: Screen , then handler: @escaping (DBState, [Discussion]?) -> Void) {
-        switch screen {
+    func log(email: String, password: String, for method: AuthMethod , then handler: @escaping (DBState, [Discussion]?) -> Void) {
+        switch method {
         case .login:
             DBCommunication.login(email: email, password: password) { (state) in
                 self.dbCommunication.loadDiscussion { (discussions) in
@@ -25,4 +25,6 @@ class LogScreenLogicController {
             }
         }
     }
+    
+    
 }

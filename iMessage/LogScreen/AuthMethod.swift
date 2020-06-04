@@ -1,14 +1,14 @@
 //
-//  Screen.swift
+//  AuthMethod.swift
 //  iMessage
 //
-//  Created by Mael Romanin Bluteau on 29/05/2020.
+//  Created by Mael Romanin Bluteau on 04/06/2020.
 //  Copyright © 2020 Mael Romanin Bluteau. All rights reserved.
 //
 
 import Foundation
 
-enum Screen: String {
+enum AuthMethod: String {
     case login = "Login"
     case register = "Register"
 }

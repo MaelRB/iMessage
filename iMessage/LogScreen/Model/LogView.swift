@@ -13,9 +13,9 @@ class LogView: UIView {
     //MARK: - UI elements
     private var stackView: UIStackView!
     private var title: UILabel!
-    var screen = Screen.login {
+    var method = AuthMethod.login {
         didSet {
-            title.text = self.screen.rawValue
+            title.text = self.method.rawValue
             updateStackViewHeight()
             updateCheckButton()
         }
@@ -150,7 +150,7 @@ class LogView: UIView {
         title.translatesAutoresizingMaskIntoConstraints = false
         setTitleConstraints()
         title.font = Constant.Font.titleFont
-        title.text = screen.rawValue
+        title.text = method.rawValue
     }
     
     private func setTitleConstraints() {
@@ -174,7 +174,7 @@ class LogView: UIView {
     // MARK: - Other
     
     private func updateStackViewHeight() {
-        switch screen {
+        switch method {
         case .login:
             usernameTextField.isHidden = true
             stackViewHeightConstraint.constant = Constant.Size.textFieldSize.height * 2
@@ -208,18 +208,18 @@ class LogView: UIView {
     }
     
     private func switchScreen() {
-        switch screen {
+        switch method {
         case .login:
-            screen = .register
+            method = .register
         case .register:
-            screen = .login
+            method = .login
         }
     }
     
     private func updateCheckButton() {
         let xPos = Constant.Size.textFieldSize.width - (Constant.Size.textFieldSize.height / 2)
         let height = Constant.Size.textFieldSize.height
-        switch screen {
+        switch method {
         case .login:
             logButton.frame = CGRect(x: xPos, y: height / 1.8, width: height * 0.8, height: height * 0.8)
         case .register:
@@ -235,7 +235,7 @@ class LogView: UIView {
             self.apparition()
             self.screenButton.apparition()
         }
-        screenButton.disparition(screen)
+        screenButton.disparition(method)
     }
     
     func getTextFieldInput() -> (String, String)? {

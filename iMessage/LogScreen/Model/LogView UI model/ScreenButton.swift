@@ -43,11 +43,11 @@ class ScreenButton: UIButton {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func disparition(_ screen: Screen) {
+    func disparition(_ method: AuthMethod) {
         UIView.animate(withDuration: 0.5, animations: {
             self.transform = CGAffineTransform(translationX: -self.width, y: 0)
         }) { (_) in
-            self.setAttributedTitle(NSAttributedString(string: screen.rawValue, attributes: [NSAttributedString.Key.font: Constant.Font.textFont, NSAttributedString.Key.foregroundColor: Constant.Color.tappable!]), for: .normal)
+            self.setAttributedTitle(NSAttributedString(string: method.rawValue, attributes: [NSAttributedString.Key.font: Constant.Font.textFont, NSAttributedString.Key.foregroundColor: Constant.Color.tappable!]), for: .normal)
         }
     }
     
