@@ -15,7 +15,6 @@
 		8A69159F2461F19C00616595 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A69159E2461F19C00616595 /* GoogleService-Info.plist */; };
 		8A9DDDB1247E9D1D00745539 /* LogScreenLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB0247E9D1D00745539 /* LogScreenLogicController.swift */; };
 		8A9DDDB7247E9EA300745539 /* DBCommunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB6247E9EA300745539 /* DBCommunication.swift */; };
-		8A9DDDB9247E9F8100745539 /* DBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDB8247E9F8100745539 /* DBState.swift */; };
 		8A9DDDDC247FF95E00745539 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A9DDDDB247FF95D00745539 /* loading.json */; };
 		8A9DDDE424825EDA00745539 /* DiscussionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DDDE324825EDA00745539 /* DiscussionCell.swift */; };
 		8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */; };
@@ -38,6 +37,9 @@
 		8AAB8EC6246AD0F8006C8244 /* CreateDiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB8EC5246AD0F8006C8244 /* CreateDiscussionViewController.swift */; };
 		8AAB8ECA246B2A93006C8244 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB8EC9246B2A93006C8244 /* Discussion.swift */; };
 		8AABA0C824897ED6005B434B /* AuthMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABA0C724897ED6005B434B /* AuthMethod.swift */; };
+		8AABA0CA24898017005B434B /* LogState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABA0C924898017005B434B /* LogState.swift */; };
+		8AABA0CC2489805F005B434B /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABA0CB2489805F005B434B /* AuthUser.swift */; };
+		8AABA0CE248A723F005B434B /* DBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AABA0CD248A723F005B434B /* DBState.swift */; };
 		935C07C8A12FBA38E05F1734 /* Pods_iMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +55,6 @@
 		8A69159E2461F19C00616595 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A9DDDB0247E9D1D00745539 /* LogScreenLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogScreenLogicController.swift; path = iMessage/LogScreen/Model/LogScreenLogicController.swift; sourceTree = SOURCE_ROOT; };
 		8A9DDDB6247E9EA300745539 /* DBCommunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCommunication.swift; sourceTree = "<group>"; };
-		8A9DDDB8247E9F8100745539 /* DBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBState.swift; sourceTree = "<group>"; };
 		8A9DDDDB247FF95D00745539 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		8A9DDDE324825EDA00745539 /* DiscussionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionCell.swift; sourceTree = "<group>"; };
 		8AA618B0247D7FAC0062CC93 /* LogScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogScreenViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +77,9 @@
 		8AAB8EC5246AD0F8006C8244 /* CreateDiscussionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiscussionViewController.swift; sourceTree = "<group>"; };
 		8AAB8EC9246B2A93006C8244 /* Discussion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Discussion.swift; path = iMessage/Controller/Discussion.swift; sourceTree = SOURCE_ROOT; };
 		8AABA0C724897ED6005B434B /* AuthMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthMethod.swift; path = iMessage/LogScreen/AuthMethod.swift; sourceTree = SOURCE_ROOT; };
+		8AABA0C924898017005B434B /* LogState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogState.swift; sourceTree = "<group>"; };
+		8AABA0CB2489805F005B434B /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		8AABA0CD248A723F005B434B /* DBState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBState.swift; sourceTree = "<group>"; };
 		A73DEE506D4F52A9E38DD814 /* Pods-iMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessage.debug.xcconfig"; path = "Target Support Files/Pods-iMessage/Pods-iMessage.debug.xcconfig"; sourceTree = "<group>"; };
 		E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -219,6 +223,7 @@
 				8AA618C3247D80FD0062CC93 /* AppTitleLabel.swift */,
 				8AA618C5247D81140062CC93 /* TopCurveView.swift */,
 				8AA618C7247D812F0062CC93 /* BottomCurveView.swift */,
+				8AABA0C924898017005B434B /* LogState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,7 +253,8 @@
 				8AAB8EC3246A7DD5006C8244 /* Message.swift */,
 				8AAB8EBE2469B2B9006C8244 /* User.swift */,
 				8A9DDDB6247E9EA300745539 /* DBCommunication.swift */,
-				8A9DDDB8247E9F8100745539 /* DBState.swift */,
+				8AABA0CD248A723F005B434B /* DBState.swift */,
+				8AABA0CB2489805F005B434B /* AuthUser.swift */,
 			);
 			path = GlobalModel;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 			files = (
 				8AAB8EBB246993E1006C8244 /* Constant.swift in Sources */,
 				8AA618B1247D7FAC0062CC93 /* LogScreenViewController.swift in Sources */,
+				8AABA0CC2489805F005B434B /* AuthUser.swift in Sources */,
 				8AAB8EB22469865A006C8244 /* DiscussionViewController.swift in Sources */,
 				8A9DDDE424825EDA00745539 /* DiscussionCell.swift in Sources */,
 				8AAB8EC12469B6CF006C8244 /* MessageCell.swift in Sources */,
@@ -417,11 +424,12 @@
 				8AAB8EBF2469B2B9006C8244 /* User.swift in Sources */,
 				8AA618C6247D81140062CC93 /* TopCurveView.swift in Sources */,
 				8AA618C2247D80E30062CC93 /* CheckButton.swift in Sources */,
-				8A9DDDB9247E9F8100745539 /* DBState.swift in Sources */,
+				8AABA0CE248A723F005B434B /* DBState.swift in Sources */,
 				8AAB8ECA246B2A93006C8244 /* Discussion.swift in Sources */,
 				8AA618C0247D80CE0062CC93 /* UIStackViewExt.swift in Sources */,
 				8A69158B2461F10200616595 /* AppDelegate.swift in Sources */,
 				8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */,
+				8AABA0CA24898017005B434B /* LogState.swift in Sources */,
 				8A9DDDB7247E9EA300745539 /* DBCommunication.swift in Sources */,
 				8AA618BB247D804C0062CC93 /* ScreenButton.swift in Sources */,
 				8A69158D2461F10200616595 /* SceneDelegate.swift in Sources */,

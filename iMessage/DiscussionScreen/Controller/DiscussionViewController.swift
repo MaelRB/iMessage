@@ -15,7 +15,7 @@ class DiscussionViewController: UIViewController {
     
     let dbCommunication = DBCommunication.sharedInstance
     
-    var discussions = [Discussion]()
+    var authUser: AuthUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +67,7 @@ class DiscussionViewController: UIViewController {
     
     @objc func addDiscussion() {
         weak var vc = storyboard?.instantiateViewController(identifier: "createDiscussion") as? CreateDiscussionViewController
-        vc?.discussions = discussions
+        vc?.discussions = authUser.discussion
         showDetailViewController(vc!, sender: self)
     }
     
@@ -83,7 +83,7 @@ class DiscussionViewController: UIViewController {
         if segue.identifier == "goToDiscussion" {
             let row = tableView.indexPathForSelectedRow!.row
             if let vc = segue.destination as? MessageViewController {
-                vc.discussion = discussions[row]
+                vc.discussion = authUser.discussion[row]
             }
         }
     }
@@ -93,15 +93,15 @@ class DiscussionViewController: UIViewController {
 extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return discussions.count
+        return authUser.discussion.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discussionCell", for: indexPath) as! DiscussionCell
         cell.setup()
-        cell.setName(discussions[indexPath.row].to.pseudo)
-        cell.setLastMessage(discussions[indexPath.row].lastMessage)
-        cell.setDate(discussions[indexPath.row].date)
+        cell.setName(authUser.discussion[indexPath.row].to.username)
+        cell.setLastMessage(authUser.discussion[indexPath.row].lastMessage)
+        cell.setDate(authUser.discussion[indexPath.row].date)
         return cell
     }
     
@@ -112,7 +112,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let eltRemoved = discussions.remove(at: indexPath.row)
+            let eltRemoved = authUser.discussion.remove(at: indexPath.row)
             dbCommunication.deleteDiscussion(eltRemoved)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

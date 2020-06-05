@@ -38,7 +38,7 @@ class CreateDiscussionViewController: UIViewController {
     
     func isDiscussionAlreadyExist() -> Bool {
         for discussion in discussions {
-            if discussion.to.email == textField.text {
+            if discussion.to.mail == textField.text {
                 return true
             }
         }

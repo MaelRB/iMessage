@@ -14,9 +14,9 @@ struct Constant {
     
     struct Contact {
         static var listOfContacts = [
-            User(pseudo: "admin", email: "1@2.com"),
-            User(pseudo: "Bob", email: "0@0.com"),
-            User(pseudo: "Alice", email: "1@1.com")]
+            User(mail: "1@2.com", username: "admin"),
+            User(mail: "0@0.com", username: "Bob"),
+            User(mail: "1@1.com", username: "Alice")]
     }
     
     struct FStore {

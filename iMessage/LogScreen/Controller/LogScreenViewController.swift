@@ -60,8 +60,6 @@ class LogScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-//        loginView.cleanTextField()
-//        registerView.cleanTextField()
         logView.cleanTextField()
         view.endEditing(false)
     }
@@ -89,16 +87,27 @@ class LogScreenViewController: UIViewController {
     }
     
     @objc func checkButtonTapped() {
-        view.endEditing(true)
-        logView.showAlert(with: "")
-        logView.logButton.loading()
         guard let logInfo = logView.getTextFieldInput() else { return }
-        logicController.log(email: logInfo.0, password: logInfo.1, for: logView.method) { (state, discussions)  in
-            if let discussions = discussions {
-                self.discussions = discussions
-            }
-            self.logView.logButton.stopLoading()
+        let (mail, password) = logInfo
+        
+        // Prevent view controller that log action will begin
+        logicController.willLogUser(mail, with: password) { (state, user) in
             self.render(state)
+            
+            // Log the user
+            self.logicController.log(user, for: self.logView.method) { (state) in
+                self.render(state)
+                
+                // Load user data if it's not a new user
+                switch state {
+                case .load(let user):
+                    self.logicController.load(user) { (state) in
+                        self.render(state)
+                    }
+                default:
+                    break
+                }
+            }
         }
     }
     
@@ -123,20 +132,22 @@ class LogScreenViewController: UIViewController {
         }
     }
     
-    func render(_ state: DBState) {
+    func render(_ state: LogState) {
         switch state {
-        case .successed:
-            self.performSegue(withIdentifier: "goToDiscussion", sender: self.self)
-        case .failed(localizedDescription: let localizedDescription):
-            logView.showAlert(with: localizedDescription)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToDiscussion" {
-            if let vc = segue.destination as? DiscussionViewController {
-                vc.discussions = discussions
-            }
+        case .log:
+            view.endEditing(true)
+            logView.showAlert(with: "")
+            logView.logButton.loading()
+            break
+        case .load(_):
+            break
+        case .presenting(let user):
+            logView.logButton.stopLoading()
+            let vc = storyboard?.instantiateViewController(identifier: "DiscussionVC") as! DiscussionViewController
+            vc.authUser = user
+            navigationController?.show(vc, sender: self)
+        case .failed(let description):
+            logView.showAlert(with: description)
         }
     }
     

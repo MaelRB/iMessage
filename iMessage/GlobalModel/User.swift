@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct User {
-    var pseudo: String
-    var email: String
+class User {
+    
+    var mail: String
+    var username: String
+    
+    init(mail: String, username: String?) {
+        self.mail = mail
+        self.username = username ?? "[unknown]"
+    }
 }

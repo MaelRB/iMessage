@@ -80,7 +80,7 @@ struct DBCommunication {
         for user in part {
             if user != Auth.auth().currentUser!.email! {
                 for contact in Constant.Contact.listOfContacts {
-                    if contact.email == user {
+                    if contact.mail == user {
                         return contact
                     }
                 }
@@ -90,7 +90,7 @@ struct DBCommunication {
         }
         if toHimself == part.count {
             for contact in Constant.Contact.listOfContacts {
-                if contact.email == Auth.auth().currentUser!.email {
+                if contact.mail == Auth.auth().currentUser!.email {
                     return contact
                 }
             }
