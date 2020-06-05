@@ -9,8 +9,7 @@
 import Foundation
 
 enum LogState {
-    case log
-    case load(AuthUser)
-    case presenting(AuthUser)
+    case successed
+    case presenting([Discussion])
     case failed(String)
 }

@@ -238,9 +238,9 @@ class LogView: UIView {
         screenButton.disparition(method)
     }
     
-    func getTextFieldInput() -> (String, String)? {
+    func getTextFieldInput() -> (String, String, String?)? {
         guard let email = mailTextField.textField.text, let password = passwordTextField.textField.text else { return nil}
-        return (email, password)
+        return (email, password, usernameTextField.textField.text)
     }
     
     func cleanTextField() {

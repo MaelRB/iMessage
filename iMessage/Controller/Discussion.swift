@@ -10,7 +10,7 @@ import Foundation
 
 struct Discussion {
     var id: String
-    var to: User
+    var to: String
     var date: Date
     var lastMessage: String
 }

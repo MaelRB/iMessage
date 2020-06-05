@@ -28,7 +28,7 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        navigationItem.title = discussion!.to.username
+        navigationItem.title = discussion!.to
         navigationController?.navigationBar.tintColor = Constant.Color.tappable
         
         tableView.delegate = self

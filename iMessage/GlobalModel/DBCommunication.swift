@@ -62,40 +62,16 @@ struct DBCommunication {
                 for doc in snapshot!.documents {
                     let data = doc.data()
                     guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { return }
-                    guard let user = self.getParticipant(of: participant) else { return }
                     guard let id = data[Constant.FStore.discussionID] as? String else { return }
                     guard let time = data[Constant.FStore.date] as? TimeInterval else { return }
                     let date = Date(timeIntervalSince1970: time)
                     guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { return }
-                    let discussion = Discussion(id: id, to: user, date: date, lastMessage: lastMessage)
+                    let discussion = Discussion(id: id, to: "", date: date, lastMessage: lastMessage)
                     discussions.append(discussion)
                 }
             }
             handler(discussions)
         }
-    }
-    
-    private func getParticipant(of part: [String]) -> User? {
-        var toHimself = 0
-        for user in part {
-            if user != Auth.auth().currentUser!.email! {
-                for contact in Constant.Contact.listOfContacts {
-                    if contact.mail == user {
-                        return contact
-                    }
-                }
-            } else {
-                toHimself += 1
-            }
-        }
-        if toHimself == part.count {
-            for contact in Constant.Contact.listOfContacts {
-                if contact.mail == Auth.auth().currentUser!.email {
-                    return contact
-                }
-            }
-        }
-        return nil
     }
     
     func creatDiscussion(with participant: String) {

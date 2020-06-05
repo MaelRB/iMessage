@@ -10,10 +10,6 @@ import UIKit
 
 class LogScreenViewController: UIViewController {
     
-    // MARK: - Logic controller
-    // Manage the communication with firestore asynchronously
-    let logicController = LogScreenLogicController()
-    
     // MARK: - UI elements
 //    lazy var logScreenStateButton = LogScreenStateButton(frame: .zero)
     
@@ -71,46 +67,7 @@ class LogScreenViewController: UIViewController {
         }
     }
     
-    // MARK: - Setup
-    
-    func setLogViewConstraints() {
-        self.view.insertSubview(logView, at: 0)
-        logView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        logView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        logView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        logView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
-    }
-    
-    // MARK: - Transition animation methods
-    @objc func screenStateButtonTapped() {
-        logView.transition()
-    }
-    
-    @objc func checkButtonTapped() {
-        guard let logInfo = logView.getTextFieldInput() else { return }
-        let (mail, password) = logInfo
-        
-        // Prevent view controller that log action will begin
-        logicController.willLogUser(mail, with: password) { (state, user) in
-            self.render(state)
-            
-            // Log the user
-            self.logicController.log(user, for: self.logView.method) { (state) in
-                self.render(state)
-                
-                // Load user data if it's not a new user
-                switch state {
-                case .load(let user):
-                    self.logicController.load(user) { (state) in
-                        self.render(state)
-                    }
-                default:
-                    break
-                }
-            }
-        }
-    }
-    
+    // MARK: - Open animation
     func closeCurve() {
         UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseIn, animations: {
             self.topCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.125)
@@ -132,28 +89,63 @@ class LogScreenViewController: UIViewController {
         }
     }
     
+    // MARK: - Setup
+    
+    func setLogViewConstraints() {
+        self.view.insertSubview(logView, at: 0)
+        logView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        logView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        logView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        logView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+    }
+    
+    // MARK: - Transition animation methods
+    @objc func screenStateButtonTapped() {
+        logView.transition()
+    }
+    
+    @objc func checkButtonTapped() {
+        guard let logInfo = logView.getTextFieldInput() else { return }
+        let (mail, password, username) = logInfo
+        view.endEditing(true)
+        logView.showAlert(with: "")
+        logView.logButton.loading()
+        let _ = LogManager(log: mail, password, username: username, with: logView.method, target: self)
+    }
+    
+    
+    
     func render(_ state: LogState) {
         switch state {
-        case .log:
-            view.endEditing(true)
-            logView.showAlert(with: "")
-            logView.logButton.loading()
+        case .successed:
             break
-        case .load(_):
-            break
-        case .presenting(let user):
-            logView.logButton.stopLoading()
+        case .presenting(let discussions):
             let vc = storyboard?.instantiateViewController(identifier: "DiscussionVC") as! DiscussionViewController
-            vc.authUser = user
+            vc.discussions = discussions
+            logView.logButton.stopLoading()
             navigationController?.show(vc, sender: self)
-        case .failed(let description):
-            logView.showAlert(with: description)
+        case .failed(let errorMessage):
+            logView.logButton.stopLoading()
+            logView.showAlert(with: errorMessage)
         }
     }
     
     @objc func endEditing() {
         view.endEditing(true)
     }
+    
+}
+
+extension LogScreenViewController: LogManagerDelegate {
+    
+    func logDidFinish(with state: LogState) {
+        render(state)
+    }
+    
+    func userDidLoad(with state: LogState) {
+        render(state)
+    }
+    
     
 }
 

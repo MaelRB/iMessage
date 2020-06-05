@@ -12,18 +12,21 @@ import ChameleonFramework
 
 struct Constant {
     
-    struct Contact {
-        static var listOfContacts = [
-            User(mail: "1@2.com", username: "admin"),
-            User(mail: "0@0.com", username: "Bob"),
-            User(mail: "1@1.com", username: "Alice")]
-    }
-    
     struct FStore {
+        
+        // User
+        static let usersCollection = "users"
+        static let userName = "name"
+        static let userMail = "mail"
+        static let userPhoto = "photo"
+        
+        // Discussion
         static let discussionCollection = "discussion"
         static let discussionParticipant = "participant"
         static let discussionID = "id"
         static let lastMessageDiscussion = "lastMessage"
+        
+        // Message
         static let messagesCollection = "messages"
         static let messageBody = "body"
         static let date = "date"
