@@ -13,9 +13,11 @@ class DiscussionViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let dbCommunication = DBCommunication.sharedInstance
-    
     var discussions = [Discussion]()
+    
+    let user = Auth.auth().currentUser!
+    
+    var dataManager: DataManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,11 @@ class DiscussionViewController: UIViewController {
         
         self.title = "Messages"
         
+        dataManager = DataManager(user: user)
+        dataManager.addDiscussionListener { (discussions) in
+            self.discussions = discussions
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,25 +61,28 @@ class DiscussionViewController: UIViewController {
         rightButton.backgroundColor = Constant.Color.tappable
         rightButton.tintColor = Constant.Color.background
 
-        rightButton.layer.cornerRadius = (targetView!.frame.height * 0.66) / 2
+//        rightButton.layer.cornerRadius = (targetView!.frame.height * 0.66) / 2
+        rightButton.layer.cornerRadius = (44 * 0.66) / 2
         
         let trailingContraint = NSLayoutConstraint(item: rightButton, attribute:
             .trailingMargin, relatedBy: .equal, toItem: targetView, attribute: .trailingMargin, multiplier: 1.0, constant: -20)
         let bottomConstraint = NSLayoutConstraint(item: rightButton, attribute: .bottom, relatedBy: .equal, toItem: targetView, attribute: .bottom, multiplier: 1.0, constant: -15)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([trailingContraint, bottomConstraint])
-        rightButton.heightAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
-        rightButton.widthAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
+//        rightButton.heightAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
+        rightButton.heightAnchor.constraint(equalToConstant: 44 * 0.66).isActive = true
+//        rightButton.widthAnchor.constraint(equalToConstant: targetView!.frame.height * 0.66).isActive = true
+        rightButton.widthAnchor.constraint(equalToConstant: 44 * 0.66).isActive = true
     }
     
     @objc func addDiscussion() {
         weak var vc = storyboard?.instantiateViewController(identifier: "createDiscussion") as? CreateDiscussionViewController
-        vc?.discussions = discussions
-        showDetailViewController(vc!, sender: self)
+        show(vc!, sender: self)
     }
     
     @objc func logoutUser() {
-        dbCommunication.logout {
+        let logoutManger = LogoutManager()
+        logoutManger.logout {
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
@@ -113,7 +123,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let eltRemoved = discussions.remove(at: indexPath.row)
-            dbCommunication.deleteDiscussion(eltRemoved)
+            dataManager.deleteDiscussion(eltRemoved)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

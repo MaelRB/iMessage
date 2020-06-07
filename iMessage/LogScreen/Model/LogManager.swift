@@ -82,19 +82,25 @@ class LogManager {
             if error != nil {
                 print(error!.localizedDescription)
             } else {
-                for doc in snapshot!.documents {
-                    let data = doc.data()
-                    guard let id = data[Constant.FStore.discussionID] as? String else { return }
-                    guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { return }
-                    guard let time = data[Constant.FStore.date] as? TimeInterval else { return }
-                    let date = Date(timeIntervalSince1970: time)
-                    guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { return }
-                    let discussion = Discussion(id: id, to: self.getToUser(in: participant), date: date, lastMessage: lastMessage)
-                    discussions.append(discussion)
-                }
+                discussions = self.extractData(from: snapshot!)
             }
             self.delegate?.userDidLoad(with: .presenting(discussions))
         }
+    }
+    
+    private func extractData(from snapshot: QuerySnapshot) -> [Discussion] {
+        var discussions = [Discussion]()
+        for doc in snapshot.documents {
+            let data = doc.data()
+            guard let id = data[Constant.FStore.discussionID] as? String else { break }
+            guard let participant = data[Constant.FStore.discussionParticipant] as? [String] else { break }
+            guard let time = data[Constant.FStore.date] as? TimeInterval else { break }
+            let date = Date(timeIntervalSince1970: time)
+            guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { break }
+            let discussion = Discussion(id: id, to: self.getToUser(in: participant), date: date, lastMessage: lastMessage)
+            discussions.append(discussion)
+        }
+        return discussions
     }
     
     private func getToUser(in participant: [String]) -> String {
