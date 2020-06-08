@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,25 +17,73 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pjD-Py-57g">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="185.5" width="414" height="710.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="F6T-UT-736" id="2kL-A4-AJk"/>
                                     <outlet property="delegate" destination="F6T-UT-736" id="G95-g3-1Hv"/>
                                 </connections>
                             </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LBh-bM-LWL">
+                                <rect key="frame" x="20" y="88" width="374" height="89.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="89.5" id="d07-7J-cGk"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7Qk-4f-NTE">
+                                    <size key="itemSize" width="150" height="30"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCollection" id="ibT-Bb-aB8" customClass="UserCollectionViewCell" customModule="iMessage" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CqE-lf-X1j">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c8W-BU-LNc">
+                                                    <rect key="frame" x="8" y="2" width="26" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-Ee-pAI">
+                                                    <rect key="frame" x="67" y="5" width="42" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="logoView" destination="c8W-BU-LNc" id="w5q-ZT-LzH"/>
+                                            <outlet property="nameLabel" destination="vgT-Ee-pAI" id="zHx-Ja-m7N"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="F6T-UT-736" id="Z0C-fc-nue"/>
+                                    <outlet property="delegate" destination="F6T-UT-736" id="V90-Fn-Olm"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="pjD-Py-57g" firstAttribute="top" secondItem="X5C-9W-Cb1" secondAttribute="top" id="Xd8-M4-Vbf"/>
-                            <constraint firstItem="pjD-Py-57g" firstAttribute="leading" secondItem="X5C-9W-Cb1" secondAttribute="leading" id="Yja-n1-MW9"/>
-                            <constraint firstAttribute="bottom" secondItem="pjD-Py-57g" secondAttribute="bottom" id="eMv-bj-Zge"/>
-                            <constraint firstItem="pjD-Py-57g" firstAttribute="trailing" secondItem="X5C-9W-Cb1" secondAttribute="trailing" id="wcc-L9-cvn"/>
+                            <constraint firstItem="pjD-Py-57g" firstAttribute="trailing" secondItem="X5C-9W-Cb1" secondAttribute="trailing" id="3bj-xO-aKh"/>
+                            <constraint firstItem="LBh-bM-LWL" firstAttribute="leading" secondItem="X5C-9W-Cb1" secondAttribute="leading" constant="20" id="OJl-ZP-fyD"/>
+                            <constraint firstAttribute="bottom" secondItem="pjD-Py-57g" secondAttribute="bottom" id="djn-aS-tuE"/>
+                            <constraint firstItem="X5C-9W-Cb1" firstAttribute="trailing" secondItem="LBh-bM-LWL" secondAttribute="trailing" constant="20" id="eSw-vj-EoY"/>
+                            <constraint firstItem="LBh-bM-LWL" firstAttribute="top" secondItem="X5C-9W-Cb1" secondAttribute="top" id="fDT-6G-lZI"/>
+                            <constraint firstItem="pjD-Py-57g" firstAttribute="top" secondItem="LBh-bM-LWL" secondAttribute="bottom" constant="8" id="qPF-Li-cAl"/>
+                            <constraint firstItem="pjD-Py-57g" firstAttribute="leading" secondItem="X5C-9W-Cb1" secondAttribute="leading" id="x4B-ov-qJG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X5C-9W-Cb1"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hkf-5k-Ksk"/>
                     <connections>
+                        <outlet property="collectionView" destination="LBh-bM-LWL" id="ceS-Dr-LJs"/>
                         <outlet property="tableView" destination="pjD-Py-57g" id="6wh-p1-hGX"/>
                     </connections>
                 </viewController>

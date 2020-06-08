@@ -157,6 +157,8 @@ class UserCell: UITableViewCell {
         logoImage.removeFromSuperview()
         nameLabel.removeFromSuperview()
         mailLabel.removeFromSuperview()
+        checkbox.removeFromSuperview()
+        isCheck = false
     }
 }
     
