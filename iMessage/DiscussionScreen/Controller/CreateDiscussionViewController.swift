@@ -12,15 +12,18 @@ import Firebase
 class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var heightConstraints: NSLayoutConstraint!
     
     var userServices: UserServices!
     var users = [MRBUser]()
     var checkCell = [IndexPath]() {
         didSet {
-            updateCollectionConstraints()
+            updateCollectionConstraints(oldValue.count)
             collectionView.reloadData()
         }
     }
+    
+    var orderedUsers = [Int:[MRBUser]]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     // MARK: - View methods
@@ -33,13 +36,17 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         
         userServices = UserServices()
         userServices.getListOfUser { [weak self] (users) in
-            self?.users = users
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.users = users
+            if self.users.isEmpty == false {
+                self.orderedUsers = self.createOrderdUsersList()
+            }
+            self.tableView.reloadData()
         }
         
         tableView.register(UserCell.self, forCellReuseIdentifier: "UserCell")
         
-//        setCollectionView()
+        heightConstraints.constant = 0
         
     }
     
@@ -76,33 +83,61 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         // to do
     }
     
-    func updateCollectionConstraints() {
-//        if checkCell.count % 2 == 1 {
-//            let rows = Int(checkCell.count / 2)
-//
-//            UIView.animate(withDuration: 0.5) {
-//
-//            }
-//        }
-        collectionView.layoutIfNeeded()
+    func updateCollectionConstraints(_ oldValue: Int) {
+        if checkCell.count % 2 == 1 {
+            let rows = Int(checkCell.count / 2) + 1
+            heightConstraints.constant = CGFloat(40 * rows)
+            UIView.animate(withDuration: 0.5) {
+                self.collectionView.layoutIfNeeded()
+            }
+        } else if oldValue > checkCell.count && checkCell.count % 2 == 0 {
+            let rows = Int(checkCell.count / 2) 
+            heightConstraints.constant = CGFloat(40 * rows)
+            UIView.animate(withDuration: 0.5) {
+                self.collectionView.layoutIfNeeded()
+            }
+        }
     }
     
-//    func setCollectionView() {
-//        let width = view.frame.width - 40
-//        let y = navigationController?.navigationBar.frame.maxY
-//        collectionView.frame = CGRect(x: 20, y: y!, width: width, height: 50)
-//    }
+    func createOrderdUsersList() -> [Int:[MRBUser]] {
+        var dico = [Int:[MRBUser]]()
+        let orderUsers = users.sorted { (user1, user2) -> Bool in
+            user1.name.capitalized < user2.name.capitalized
+        }
+        
+        var key = 0
+        var firstLetter = orderUsers.first!.name.first
+        
+        dico.updateValue([], forKey: key)
+        for user in orderUsers {
+            if user.name.first == firstLetter {
+                dico[key]?.append(user)
+            } else {
+                key += 1
+                firstLetter = user.name.first
+                dico.updateValue([], forKey: key)
+                dico[key]?.append(user)
+            }
+        }
+        return dico
+    }
+    
 }
 
 extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return orderedUsers.keys.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return orderedUsers[section]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
         cell.setup()
+        let users = orderedUsers[indexPath.section]!
         cell.setName(users[indexPath.row].name)
         cell.setMail(users[indexPath.row].mail)
         if checkCell.contains(indexPath) {
@@ -118,13 +153,7 @@ extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = Constant.Color.background
-        return view
-    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! UserCell
         cell.cellTapped()
@@ -137,6 +166,14 @@ extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSo
             checkCell.append(indexPath)
         }
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return orderedUsers[section]?.first!.name.first!.uppercased()
+    }
 }
 
 extension CreateDiscussionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -147,13 +184,14 @@ extension CreateDiscussionViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCollection", for: indexPath) as! UserCollectionViewCell
-        let user = users[indexPath.item]
+        let indexPath = checkCell[indexPath.item]
+        let user = orderedUsers[indexPath.section]![indexPath.row]
         cell.setup(name: user.name, photoString: user.photoUrl)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 30)
+        return CGSize(width: 125, height: 30)
     }
     
     

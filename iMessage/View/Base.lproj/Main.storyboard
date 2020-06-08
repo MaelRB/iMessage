@@ -30,15 +30,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="89.5" id="d07-7J-cGk"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7Qk-4f-NTE">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="7Qk-4f-NTE">
                                     <size key="itemSize" width="150" height="30"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCollection" id="ibT-Bb-aB8" customClass="UserCollectionViewCell" customModule="iMessage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                        <rect key="frame" x="5" y="0.0" width="150" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CqE-lf-X1j">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
@@ -48,7 +48,7 @@
                                                     <rect key="frame" x="8" y="2" width="26" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-Ee-pAI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-Ee-pAI">
                                                     <rect key="frame" x="67" y="5" width="42" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -84,6 +84,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hkf-5k-Ksk"/>
                     <connections>
                         <outlet property="collectionView" destination="LBh-bM-LWL" id="ceS-Dr-LJs"/>
+                        <outlet property="heightConstraints" destination="d07-7J-cGk" id="gIk-TD-zye"/>
                         <outlet property="tableView" destination="pjD-Py-57g" id="6wh-p1-hGX"/>
                     </connections>
                 </viewController>
