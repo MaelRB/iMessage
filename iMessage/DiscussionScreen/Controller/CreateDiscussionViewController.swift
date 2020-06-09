@@ -143,6 +143,9 @@ extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSo
             checkCell.removeAll { (index) -> Bool in
                 indexPath == index
             }
+            participants.removeAll { (user) -> Bool in
+                self.userList[indexPath].mail == user.mail
+            }
         } else {
             checkCell.append(indexPath)
         }
@@ -186,6 +189,13 @@ extension CreateDiscussionViewController: UISearchBarDelegate {
         for user in users {
             if user.mail == research && isAlreadyAdd(research) == false {
                 participants.append(user)
+                do {
+                    let indexPath = try userList.getIndexPath(for: user)
+                    updateCheckCell(for: indexPath)
+                }
+                catch {
+                    print(error)
+                }
                 break
             }
         }
@@ -198,5 +208,11 @@ extension CreateDiscussionViewController: UISearchBarDelegate {
             }
         }
         return false
+    }
+    
+    func updateCheckCell(for indexPath: IndexPath) {
+        checkCell.append(indexPath)
+        tableView.reloadData()
+        collectionView.reloadData()
     }
 }

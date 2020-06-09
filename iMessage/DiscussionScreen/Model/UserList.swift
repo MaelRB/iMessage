@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum UserListError: Error {
+    case elementNotFound
+}
+
 class UserList {
     
     private var orderedUsers = [Int:[MRBUser]]()
@@ -57,6 +61,24 @@ class UserList {
     
     func getSectionTitle(for section: Int) -> String {
         return orderedUsers[section]!.first!.name.first!.uppercased()
+    }
+    
+    func getIndexPath(for user: MRBUser) throws -> IndexPath {
+        var section = 0
+        var row = 0
+        
+        for key in 0..<orderedUsers.keys.count {
+            let users = orderedUsers[key]!
+            for (index, value) in users.enumerated() {
+                if value.mail == user.mail {
+                    section = key
+                    row = index
+                    return IndexPath(row: row, section: section)
+                }
+            }
+        }
+        
+        throw UserListError.elementNotFound
     }
     
 }
