@@ -23,7 +23,9 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         }
     }
     
-    var orderedUsers = [Int:[MRBUser]]()
+    private var participants = [MRBUser]()
+    
+    var userList = UserList()
     
     @IBOutlet weak var collectionView: UICollectionView!
     // MARK: - View methods
@@ -39,7 +41,7 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
             guard let self = self else { return }
             self.users = users
             if self.users.isEmpty == false {
-                self.orderedUsers = self.createOrderdUsersList()
+                self.userList.createUsersList(with: users)
             }
             self.tableView.reloadData()
         }
@@ -68,6 +70,7 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        searchController.searchBar.delegate = self
     }
     
     func removeRightButton(){
@@ -84,62 +87,40 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
     }
     
     func updateCollectionConstraints(_ oldValue: Int) {
-        if checkCell.count % 2 == 1 {
+        if checkCell.count % 3 == 1 {
             let rows = Int(checkCell.count / 2) + 1
-            heightConstraints.constant = CGFloat(40 * rows)
+            heightConstraints.constant = CGFloat(55 * rows)
             UIView.animate(withDuration: 0.5) {
                 self.collectionView.layoutIfNeeded()
             }
-        } else if oldValue > checkCell.count && checkCell.count % 2 == 0 {
+        } else if oldValue > checkCell.count && checkCell.count % 3 == 0 {
             let rows = Int(checkCell.count / 2) 
-            heightConstraints.constant = CGFloat(40 * rows)
+            heightConstraints.constant = CGFloat(55 * rows)
             UIView.animate(withDuration: 0.5) {
                 self.collectionView.layoutIfNeeded()
             }
         }
-    }
-    
-    func createOrderdUsersList() -> [Int:[MRBUser]] {
-        var dico = [Int:[MRBUser]]()
-        let orderUsers = users.sorted { (user1, user2) -> Bool in
-            user1.name.capitalized < user2.name.capitalized
-        }
-        
-        var key = 0
-        var firstLetter = orderUsers.first!.name.first
-        
-        dico.updateValue([], forKey: key)
-        for user in orderUsers {
-            if user.name.first == firstLetter {
-                dico[key]?.append(user)
-            } else {
-                key += 1
-                firstLetter = user.name.first
-                dico.updateValue([], forKey: key)
-                dico[key]?.append(user)
-            }
-        }
-        return dico
     }
     
 }
 
+//MARK: - Table view delegate & data source methods
 extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return orderedUsers.keys.count
+        return userList.getTotalOfKey()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderedUsers[section]!.count
+        return userList.getCount(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
         cell.setup()
-        let users = orderedUsers[indexPath.section]!
-        cell.setName(users[indexPath.row].name)
-        cell.setMail(users[indexPath.row].mail)
+        let user = userList[indexPath]
+        cell.setName(user.name)
+        cell.setMail(user.mail)
         if checkCell.contains(indexPath) {
             cell.isCheck = true
         }
@@ -172,9 +153,11 @@ extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return orderedUsers[section]?.first!.name.first!.uppercased()
+        return userList.getSectionTitle(for: section)
     }
 }
+
+//MARK: - Collection view deleagte & data source methods
 
 extension CreateDiscussionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -185,14 +168,35 @@ extension CreateDiscussionViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCollection", for: indexPath) as! UserCollectionViewCell
         let indexPath = checkCell[indexPath.item]
-        let user = orderedUsers[indexPath.section]![indexPath.row]
+        let user = userList[indexPath]
         cell.setup(name: user.name, photoString: user.photoUrl)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 125, height: 30)
+        let width = (view.frame.width - 80) / 3
+        return CGSize(width: width, height: 30)
+    }
+}
+
+extension CreateDiscussionViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let research = searchBar.text!
+        for user in users {
+            if user.mail == research && isAlreadyAdd(research) == false {
+                participants.append(user)
+                break
+            }
+        }
     }
     
-    
+    func isAlreadyAdd(_ mail: String) -> Bool {
+        for user in participants {
+            if mail == user.mail {
+                return true
+            }
+        }
+        return false
+    }
 }
