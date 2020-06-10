@@ -23,7 +23,17 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         }
     }
     
-    private var participants = [MRBUser]()
+    var parentVC: DiscussionViewController!
+    
+    private var participants = [MRBUser]() {
+        didSet {
+            if self.participants.isEmpty {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            } else {
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+        }
+    }
     
     var userList = UserList()
     
@@ -48,8 +58,10 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
         
         tableView.register(UserCell.self, forCellReuseIdentifier: "UserCell")
         
-        heightConstraints.constant = 0
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        navigationItem.rightBarButtonItem?.isEnabled = false
         
+        heightConstraints.constant = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +95,6 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        // to do
     }
     
     func updateCollectionConstraints(_ oldValue: Int) {
@@ -100,6 +111,17 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
                 self.collectionView.layoutIfNeeded()
             }
         }
+    }
+    
+    @objc func done() {
+        let discussionServices = DiscussionServices()
+        discussionServices.createDiscussion(with: participants) {
+            self.parentVC.isNewDiscussionTransition = true
+            self.navigationController?.popToViewController(self.parentVC, animated: true)
+        }
+    }
+    
+    func createDiscussion() {
     }
     
 }
@@ -148,6 +170,7 @@ extension CreateDiscussionViewController: UITableViewDelegate, UITableViewDataSo
             }
         } else {
             checkCell.append(indexPath)
+            participants.append(userList[indexPath])
         }
     }
     

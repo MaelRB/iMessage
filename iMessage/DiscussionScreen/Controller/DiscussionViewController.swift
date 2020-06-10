@@ -19,6 +19,8 @@ class DiscussionViewController: UIViewController {
     
     var dataManager: DataManager!
     
+    var isNewDiscussionTransition = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,6 +52,19 @@ class DiscussionViewController: UIViewController {
         setCreateDiscussionButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if isNewDiscussionTransition == true {
+            isNewDiscussionTransition = false
+            DispatchQueue.main.async {
+                self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+                self.performSegue(withIdentifier: "goToDiscussion", sender: self)
+                self.tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+            }
+        }
+        
+    }
+    
     func setCreateDiscussionButton() {
         let targetView = self.navigationController?.navigationBar
         let rightButton = UIButton()
@@ -77,6 +92,7 @@ class DiscussionViewController: UIViewController {
     
     @objc func addDiscussion() {
         weak var vc = storyboard?.instantiateViewController(identifier: "createDiscussion") as? CreateDiscussionViewController
+        vc?.parentVC = self
         show(vc!, sender: self)
     }
     
