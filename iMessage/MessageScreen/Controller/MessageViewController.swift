@@ -82,7 +82,7 @@ class MessageViewController: UIViewController {
         
         let isKeyboardShowing = notification.name == UIResponder.keyboardWillChangeFrameNotification
         
-        bottomConstraints.constant = isKeyboardShowing ? keyboardViewEndFrame.height : 0
+        bottomConstraints.constant = isKeyboardShowing ? keyboardViewEndFrame.height : 5
         
         UIView.animate(withDuration: 0, delay: 0, options: .curveLinear, animations: {
             self.view.layoutIfNeeded()
