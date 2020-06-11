@@ -10,52 +10,55 @@ import UIKit
 import Firebase
 
 class MessageCell: UITableViewCell {
-    
-    var view: UIView!
-    var body: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    var body = UILabel()
+    var bubbleBackground = UIView()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(bubbleBackground)
+        addSubview(body)
+        body.numberOfLines = 0
+        body.translatesAutoresizingMaskIntoConstraints = false
+        
+        bubbleBackground.translatesAutoresizingMaskIntoConstraints = false
+        bubbleBackground.layer.cornerRadius = 5
+        
+        let constraints = [body.topAnchor.constraint(equalTo: topAnchor, constant: 28),
+                           body.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -28),
+                           bubbleBackground.topAnchor.constraint(equalTo: body.topAnchor, constant: -12),
+                           bubbleBackground.leftAnchor.constraint(equalTo: body.leftAnchor, constant: -12),
+                           bubbleBackground.rightAnchor.constraint(equalTo: body.rightAnchor, constant: 12),
+                           bubbleBackground.bottomAnchor.constraint(equalTo: body.bottomAnchor, constant: 12),
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
     }
     
-    func setupView() {
-        let width = Constant.CellSize.cellWidth
-        let height = contentView.frame.height * 0.8
-        view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        contentView.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: height).isActive = true
-        view.widthAnchor.constraint(equalToConstant: width).isActive = true
-        view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        view.layer.cornerRadius = view.frame.height / 2
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func setupBody() {
-        body = UILabel(frame: CGRect(x: 10, y: 5, width: view.frame.width - 20, height: view.frame.height - 10))
-        view.addSubview(body)
+    private func setupBody() {
+        let height = body.getHeight(with: contentView.frame.width - 20)
+        body.frame = CGRect(x: 10, y: 5, width: contentView.frame.width - 20, height: height)
+        body.numberOfLines = 0
     }
     
     func configure(_ message: Message) {
+        body.text = message.body
         
-        setupView()
         if message.sender == Auth.auth().currentUser!.email! {
-            view.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            view.backgroundColor = Constant.Color.sendMessage
-            setupBody()
-            body.text = message.body
+            body.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.66).isActive = true
+            body.rightAnchor.constraint(equalTo: rightAnchor, constant: -28).isActive = true
+            bubbleBackground.backgroundColor = Constant.Color.sendMessage
             body.textColor = .white
+            
         } else {
-            view.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-            view.backgroundColor = Constant.Color.receiveMessage
-            setupBody()
-            body.text = message.body
+            body.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.66).isActive = true
+            body.leftAnchor.constraint(equalTo: leftAnchor, constant: 28).isActive = true
+            bubbleBackground.backgroundColor = Constant.Color.receiveMessage
             body.textColor = .black
         }
     }
