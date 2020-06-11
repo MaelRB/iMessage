@@ -18,11 +18,12 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var bottomConstraints: NSLayoutConstraint!
     
     // MARK: Other properties
-    let dbCommunication = DBCommunication.sharedInstance
     
     var discussion: Discussion?
     
     var messages = [Message]()
+    
+    let messageManager = MessageManager()
     
     // MARK: - View methods
     override func viewDidLoad() {
@@ -38,7 +39,7 @@ class MessageViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .onDrag
         
-        dbCommunication.loadMessages(for: discussion!) { (messages) in
+        messageManager.loadMessages(for: discussion!) { (messages) in
             self.messages = messages
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -95,7 +96,7 @@ class MessageViewController: UIViewController {
     
     func send() {
         let message = Message(body: messageTextField.text!, sender: Auth.auth().currentUser!.email!, date: Date(timeIntervalSince1970: Date().timeIntervalSince1970))
-        dbCommunication.sendMessage(message, in: discussion!)
+        messageManager.sendMessage(message, in: discussion!)
         messages.append(message)
         messageTextField.text = ""
     }
