@@ -40,12 +40,6 @@ class MessageCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupBody() {
-        let height = body.getHeight(with: contentView.frame.width - 20)
-        body.frame = CGRect(x: 10, y: 5, width: contentView.frame.width - 20, height: height)
-        body.numberOfLines = 0
-    }
-    
     func configure(_ message: Message) {
         body.text = message.body
         

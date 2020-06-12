@@ -125,7 +125,7 @@ extension DiscussionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discussionCell", for: indexPath) as! DiscussionCell
         cell.setup()
-        cell.setName(discussions[indexPath.row].to)
+        cell.setName(discussions[indexPath.row].title)
         cell.setLastMessage(discussions[indexPath.row].lastMessage)
         cell.setDate(discussions[indexPath.row].date)
         return cell

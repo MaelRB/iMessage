@@ -47,7 +47,6 @@
 		8AE6DE13248FE54D00C89654 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE12248FE54D00C89654 /* UserList.swift */; };
 		8AE6DE1624910E7600C89654 /* DiscussionServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE1524910E7600C89654 /* DiscussionServices.swift */; };
 		8AE6DE3F2492632C00C89654 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE3E2492632C00C89654 /* MessageManager.swift */; };
-		8AE6DE412492695800C89654 /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE402492695800C89654 /* UILabel Extension.swift */; };
 		935C07C8A12FBA38E05F1734 /* Pods_iMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,7 +94,6 @@
 		8AE6DE12248FE54D00C89654 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		8AE6DE1524910E7600C89654 /* DiscussionServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionServices.swift; sourceTree = "<group>"; };
 		8AE6DE3E2492632C00C89654 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
-		8AE6DE402492695800C89654 /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
 		A73DEE506D4F52A9E38DD814 /* Pods-iMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessage.debug.xcconfig"; path = "Target Support Files/Pods-iMessage/Pods-iMessage.debug.xcconfig"; sourceTree = "<group>"; };
 		E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -302,7 +300,6 @@
 			children = (
 				8AAB8EC3246A7DD5006C8244 /* Message.swift */,
 				8AE6DE3E2492632C00C89654 /* MessageManager.swift */,
-				8AE6DE402492695800C89654 /* UILabel Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -476,7 +473,6 @@
 				8A69158B2461F10200616595 /* AppDelegate.swift in Sources */,
 				8AE6DE1624910E7600C89654 /* DiscussionServices.swift in Sources */,
 				8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */,
-				8AE6DE412492695800C89654 /* UILabel Extension.swift in Sources */,
 				8AABA0CA24898017005B434B /* LogState.swift in Sources */,
 				8AA618BB247D804C0062CC93 /* ScreenButton.swift in Sources */,
 				8AABA0D5248BCAB2005B434B /* DataManager.swift in Sources */,

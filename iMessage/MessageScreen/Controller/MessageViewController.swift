@@ -29,8 +29,10 @@ class MessageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        navigationItem.title = discussion!.to
+        navigationItem.title = discussion!.title
         navigationController?.navigationBar.tintColor = Constant.Color.tappable
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -39,6 +41,19 @@ class MessageViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .onDrag
         
+        loadMessages()
+        
+        // Manage keyboard
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        removeRightButton()
+    }
+    
+    func loadMessages() {
         messageManager.loadMessages(for: discussion!) { (messages) in
             self.messages = messages
             DispatchQueue.main.async {
@@ -49,15 +64,6 @@ class MessageViewController: UIViewController {
                 }
             }
         }
-        
-        // Manage keyboard
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        removeRightButton()
     }
     
     func removeRightButton(){
@@ -99,6 +105,21 @@ class MessageViewController: UIViewController {
         messageManager.sendMessage(message, in: discussion!)
         messages.append(message)
         messageTextField.text = ""
+    }
+    
+    @objc func editTapped() {
+        let ac = UIAlertController(title: "Give new discussion name", message: "", preferredStyle: .alert)
+        ac.addTextField(configurationHandler: nil)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) in
+            guard let newTitle = ac.textFields?.first?.text else { return }
+            guard newTitle.isEmpty == false else { return }
+            let discussionServices = DiscussionServices()
+            discussionServices.changeTitle(newTitle, for: self.discussion!)
+            self.discussion?.title = newTitle
+            self.title = newTitle
+        }))
+        present(ac, animated: true)
     }
     
 }

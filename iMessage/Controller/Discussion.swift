@@ -13,4 +13,5 @@ struct Discussion {
     var to: String
     var date: Date
     var lastMessage: String
+    var title: String
 }

@@ -42,7 +42,8 @@ class DataManager {
             guard let time = data[Constant.FStore.date] as? TimeInterval else { break }
             let date = Date(timeIntervalSince1970: time)
             guard let lastMessage = data[Constant.FStore.lastMessageDiscussion] as? String else { break }
-            let discussion = Discussion(id: id, to: self.getToUser(in: participant), date: date, lastMessage: lastMessage)
+            guard let title = data[Constant.FStore.discussionTitle] as? String else { break }
+            let discussion = Discussion(id: id, to: self.getToUser(in: participant), date: date, lastMessage: lastMessage, title: title)
             discussions.append(discussion)
         }
         return discussions
