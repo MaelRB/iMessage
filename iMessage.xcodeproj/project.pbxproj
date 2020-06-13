@@ -47,6 +47,7 @@
 		8AE6DE13248FE54D00C89654 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE12248FE54D00C89654 /* UserList.swift */; };
 		8AE6DE1624910E7600C89654 /* DiscussionServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE1524910E7600C89654 /* DiscussionServices.swift */; };
 		8AE6DE3F2492632C00C89654 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE3E2492632C00C89654 /* MessageManager.swift */; };
+		8AE6DE6524950D5500C89654 /* ProfilMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE6DE6424950D5500C89654 /* ProfilMenuViewController.swift */; };
 		935C07C8A12FBA38E05F1734 /* Pods_iMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		8AE6DE12248FE54D00C89654 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		8AE6DE1524910E7600C89654 /* DiscussionServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionServices.swift; sourceTree = "<group>"; };
 		8AE6DE3E2492632C00C89654 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		8AE6DE6424950D5500C89654 /* ProfilMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilMenuViewController.swift; sourceTree = "<group>"; };
 		A73DEE506D4F52A9E38DD814 /* Pods-iMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessage.debug.xcconfig"; path = "Target Support Files/Pods-iMessage/Pods-iMessage.debug.xcconfig"; sourceTree = "<group>"; };
 		E635801D04A6FFCE673A7FAA /* Pods_iMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +140,7 @@
 				8AA618AE247D7F3B0062CC93 /* LogScreen */,
 				8A9DDDB2247E9DBD00745539 /* DiscussionScreen */,
 				8A9DDDB4247E9E3000745539 /* MessageScreen */,
+				8AE6DE6224950D0D00C89654 /* Profil Menu */,
 				8AAB8EB9246993CC006C8244 /* GlobalModel */,
 				8AAB8EB8246993B1006C8244 /* View */,
 				8A6915932461F10400616595 /* Assets.xcassets */,
@@ -302,6 +305,14 @@
 				8AE6DE3E2492632C00C89654 /* MessageManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8AE6DE6224950D0D00C89654 /* Profil Menu */ = {
+			isa = PBXGroup;
+			children = (
+				8AE6DE6424950D5500C89654 /* ProfilMenuViewController.swift */,
+			);
+			path = "Profil Menu";
 			sourceTree = "<group>";
 		};
 		B6DDB67760E806B4B90EF783 /* Frameworks */ = {
@@ -473,6 +484,7 @@
 				8A69158B2461F10200616595 /* AppDelegate.swift in Sources */,
 				8AE6DE1624910E7600C89654 /* DiscussionServices.swift in Sources */,
 				8AA618B4247D7FD90062CC93 /* LogView.swift in Sources */,
+				8AE6DE6524950D5500C89654 /* ProfilMenuViewController.swift in Sources */,
 				8AABA0CA24898017005B434B /* LogState.swift in Sources */,
 				8AA618BB247D804C0062CC93 /* ScreenButton.swift in Sources */,
 				8AABA0D5248BCAB2005B434B /* DataManager.swift in Sources */,

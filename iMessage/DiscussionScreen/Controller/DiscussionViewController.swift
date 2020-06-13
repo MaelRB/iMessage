@@ -30,6 +30,7 @@ class DiscussionViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(logoutUser))
         navigationController?.navigationBar.tintColor = Constant.Color.tappable
         
+        tabBarController?.tabBar.tintColor = Constant.Color.tappable
         view.backgroundColor = Constant.Color.background
         
         tableView.delegate = self
@@ -49,6 +50,7 @@ class DiscussionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        tabBarController?.tabBar.isHidden = false
         setCreateDiscussionButton()
     }
     

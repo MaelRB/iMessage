@@ -56,6 +56,7 @@ class LogScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
         logView.cleanTextField()
         view.endEditing(false)
     }
@@ -80,10 +81,10 @@ class LogScreenViewController: UIViewController {
     
     func openCurve() {
         self.appTitle.removeFromSuperview()
-         self.logView.isHidden = false
-         UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {
-             self.topCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.25)
-             self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.25)
+        self.logView.isHidden = false
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {
+            self.topCurve.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height * 0.25)
+            self.bottomCurve.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height * 0.25)
          }) { (_) in
             self.view.addSubview(self.logView)
         }
