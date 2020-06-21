@@ -32,5 +32,13 @@ Fix keyboards Issues, add logScreen and improve code quality.
 
 <img width="408" alt="Screenshot 2020-05-29 at 13 48 48" src="https://user-images.githubusercontent.com/38114983/83257330-7b1e7400-a1b4-11ea-9402-62c66c90abd8.png">
 
+## V2.0
+Fix a lot of issues and add some features.
+The app is useable and works fine at this stage. A lot of new features and improvements can be added but it's not the aim right now.
 
+- Update message cell to have a dynamic height
+- Improve data structure in firebase
+- Add a create discussion view controller
+- Improve discussion view controller UI
+- And lot more ...
 
