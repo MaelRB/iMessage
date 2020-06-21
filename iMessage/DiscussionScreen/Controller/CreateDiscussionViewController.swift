@@ -99,13 +99,13 @@ class CreateDiscussionViewController: UIViewController, UISearchResultsUpdating 
     
     func updateCollectionConstraints(_ oldValue: Int) {
         if checkCell.count % 3 == 1 {
-            let rows = Int(checkCell.count / 2) + 1
+            let rows = Int(checkCell.count / 3) + 1
             heightConstraints.constant = CGFloat(55 * rows)
             UIView.animate(withDuration: 0.5) {
                 self.collectionView.layoutIfNeeded()
             }
         } else if oldValue > checkCell.count && checkCell.count % 3 == 0 {
-            let rows = Int(checkCell.count / 2) 
+            let rows = Int(checkCell.count / 3) 
             heightConstraints.constant = CGFloat(55 * rows)
             UIView.animate(withDuration: 0.5) {
                 self.collectionView.layoutIfNeeded()
